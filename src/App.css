@@ -1,0 +1,224 @@
+#root {
+  width: 100%; 
+  margin: 0 auto;
+  padding: 0rem;
+  text-align: center;
+  box-sizing: border-box; 
+  max-width: none; 
+ 
+
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.Navbar {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+}
+
+.Slider {
+  margin-top: 20px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Navbar,
+.Slider,
+.logo,
+.card {
+  width: 100%;
+  box-sizing: border-box; 
+}
+
+
+#carouselExample {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  display: flex;
+  
+}
+
+
+.carousel-item  {
+  width: 100%;
+  height: 700px;
+}
+.card-img-top {
+  max-width: 200px; 
+  height: auto; 
+  display: block; 
+  margin: 0 auto; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.container button {
+  margin-right: 10px; 
+  margin-bottom: 10px; 
+}
+.carousel-inner {
+  width: 100%; 
+  height: 100%; 
+}
+
+.carousel-inner .carousel-item img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Désactivation de l'animation réduite */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+} 
+.card {
+  width: 100%;
+  border: 1px solid #ddd; /* Bordure légère autour de la carte */
+  border-radius: 8px; /* Coins arrondis */
+  overflow: hidden; /* Masquer le débordement */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  transition: transform 0.3s ease; /* Animation de transition */
+  margin-bottom: 20px; /* Espacement entre les cartes */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Légère translation vers le haut au survol */
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd; /* Ligne de séparation sous l'image */
+}
+
+.card-body {
+  padding: 1rem; /* Espacement interne */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: #555; /* Couleur du texte */
+  font-size: 1rem;
+  line-height: 1.5; /* Hauteur de ligne pour une meilleure lisibilité */
+}
+
+.card-text:last-child {
+  margin-bottom: 1rem; /* Espacement supplémentaire après le dernier paragraphe */
+}
+
+.card-link {
+  text-decoration: none; /* Supprimer les soulignements par défaut sur le lien */
+  color: #007bff; /* Couleur du lien */
+  font-weight: bold;
+  transition: color 0.3s ease; /* Animation de transition de couleur */
+}
+
+.card-link:hover {
+  color: #0056b3; /* Changement de couleur au survol */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease; /* Animation de transition de couleur de fond */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Changement de couleur de fond au survol */
+}
+
+
+.IMG {
+  width: 80px; /* Définissez la largeur souhaitée */
+  height: auto; /* Permettez à la hauteur de s'ajuster automatiquement en fonction de la largeur */
+  display: inline-block; /* Permettez à l'image d'être affichée en ligne avec le texte */
+  color: #fff;
+}
+
+
+
+
