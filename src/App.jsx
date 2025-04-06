@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<> <Slider /> <Prodactlist /> </>} />
         <Route path='about' element={<About />} />
-        <Route path='contact' element={<Contact />}
+        <Route path='contact' element={<Contact />} />
         <Route path='product/:productId' element={<ProductDetails />} />
       </Routes>
 
