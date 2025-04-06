@@ -17,9 +17,7 @@ function App() {
         <Route path='/' element={<> <Slider /> <Prodactlist /> </>} />
         <Route path='about' element={<About />} />
         <Route path='product/:productId' element={<ProductDetails />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/category/:categoryName" element={<Products />} />
+        
       </Routes>
 
     </div>
