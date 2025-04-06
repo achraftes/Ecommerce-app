@@ -212,3 +212,31 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Ajoutez ces styles à votre fichier Contact.css */
+
+.google-map {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .map-container {
+    height: 450px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* Animation pour le chargement de la carte */
+  @keyframes mapFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .google-map iframe {
+    animation: mapFadeIn 0.8s ease;
+  }

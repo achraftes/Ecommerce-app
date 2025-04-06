@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import GoogleMap from './GoogleMap'; // Importez le composant de carte
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -45,8 +46,8 @@ function Contact() {
               <i className="fas fa-map-marker-alt"></i>
             </div>
             <h3>Notre Adresse</h3>
-            <p>123 Rue du Commerce</p>
-            <p>75001 Paris, France</p>
+            <p>123 Avenue Mohammed V</p>
+            <p>Temara, Maroc</p>
           </div>
 
           <div className="info-card">
@@ -54,7 +55,7 @@ function Contact() {
               <i className="fas fa-phone-alt"></i>
             </div>
             <h3>Téléphone</h3>
-            <p>+33 1 23 45 67 89</p>
+            <p>+212 5 37 XX XX XX</p>
             <p>Lun-Ven: 9h-18h</p>
           </div>
 
@@ -124,12 +125,9 @@ function Contact() {
       </div>
 
       <div className="contact-map">
-        <h2>Nous Trouver</h2>
+        <h2>Nous Trouver à Temara</h2>
         <div className="map-container">
-          {/* Remplacez ce commentaire par une carte Google Maps ou autre */}
-          <div className="map-placeholder">
-            <p>Carte Google Maps à intégrer ici</p>
-          </div>
+          <GoogleMap />
         </div>
       </div>
     </div>
