@@ -1,6 +1,7 @@
 
 import './App.css';
 import About from './Componenets/About';
+import Contact  from './Componenets/Contact';
 import Navbar from './Componenets/Navbar'
 import Prodactlist from './Componenets/Prodactlist';
 import ProductDetails from './Componenets/ProductDetails';
@@ -16,8 +17,8 @@ function App() {
       <Routes>
         <Route path='/' element={<> <Slider /> <Prodactlist /> </>} />
         <Route path='about' element={<About />} />
+        <Route path='contact' element={<Contact />}
         <Route path='product/:productId' element={<ProductDetails />} />
-        
       </Routes>
 
     </div>
