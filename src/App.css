@@ -140,7 +140,7 @@ html {
   }
 }
 
-/* Désactivation de l'animation réduite */
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -148,26 +148,26 @@ html {
 } 
 .card {
   width: 100%;
-  border: 1px solid #ddd; /* Bordure légère autour de la carte */
-  border-radius: 8px; /* Coins arrondis */
-  overflow: hidden; /* Masquer le débordement */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
-  transition: transform 0.3s ease; /* Animation de transition */
-  margin-bottom: 20px; /* Espacement entre les cartes */
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease; 
+  margin-bottom: 20px; 
 }
 
 .card:hover {
-  transform: translateY(-5px); /* Légère translation vers le haut au survol */
+  transform: translateY(-5px);
 }
 
 .card-img-top {
   width: 100%;
   height: auto;
-  border-bottom: 1px solid #ddd; /* Ligne de séparation sous l'image */
+  border-bottom: 1px solid #ddd; 
 }
 
 .card-body {
-  padding: 1rem; /* Espacement interne */
+  padding: 1rem; 
 }
 
 .card-title {
@@ -176,24 +176,24 @@ html {
 }
 
 .card-text {
-  color: #555; /* Couleur du texte */
+  color: #555;
   font-size: 1rem;
-  line-height: 1.5; /* Hauteur de ligne pour une meilleure lisibilité */
+  line-height: 1.5; 
 }
 
 .card-text:last-child {
-  margin-bottom: 1rem; /* Espacement supplémentaire après le dernier paragraphe */
+  margin-bottom: 1rem; 
 }
 
 .card-link {
-  text-decoration: none; /* Supprimer les soulignements par défaut sur le lien */
-  color: #007bff; /* Couleur du lien */
+  text-decoration: none; 
+  color: #007bff; 
   font-weight: bold;
-  transition: color 0.3s ease; /* Animation de transition de couleur */
+  transition: color 0.3s ease;
 }
 
 .card-link:hover {
-  color: #0056b3; /* Changement de couleur au survol */
+  color: #0056b3; 
 }
 
 .btn-primary {
@@ -204,18 +204,18 @@ html {
   font-size: 1rem;
   border-radius: 5px;
   text-decoration: none;
-  transition: background-color 0.3s ease; /* Animation de transition de couleur de fond */
+  transition: background-color 0.3s ease; 
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; /* Changement de couleur de fond au survol */
+  background-color: #0056b3;
 }
 
 
 .IMG {
-  width: 80px; /* Définissez la largeur souhaitée */
-  height: auto; /* Permettez à la hauteur de s'ajuster automatiquement en fonction de la largeur */
-  display: inline-block; /* Permettez à l'image d'être affichée en ligne avec le texte */
+  width: 80px; 
+  height: auto; 
+  display: inline-block; 
   color: #fff;
 }
 

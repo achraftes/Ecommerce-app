@@ -10,6 +10,7 @@ import { Routes, Route, } from 'react-router-dom';
 
 function App() {
   return (
+    <>
     <div className='App'>
       <Navbar />
       <Routes>
@@ -19,8 +20,7 @@ function App() {
       </Routes>
 
     </div>
-
+    </>
   )
 }
-
 export default App
