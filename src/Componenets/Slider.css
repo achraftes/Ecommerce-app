@@ -1,0 +1,143 @@
+
+
+/* Styles pour le contenu du slider */
+.slider-content {
+    max-width: 600px;
+}
+
+.subtitle {
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.description {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Styles pour les boutons */
+.btn-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0055aa;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-outline:hover {
+    background-color: white;
+    color: #0066cc;
+}
+
+/* Styles pour le compte à rebours */
+.countdown-timer {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.time-block {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 70px;
+    text-align: center;
+}
+
+.number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    display: block;
+}
+
+.text {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Styles pour les positions textuelles */
+.text-start {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-end {
+    text-align: right;
+}
+
+/* Media Queries pour la réponsivité */
+@media (max-width: 992px) {
+    .carousel-item img {
+        height: 450px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .carousel-caption {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 350px;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .carousel-caption {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    .btn-wrapper {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -62,21 +62,21 @@ body, html {
   }
 } */
 
-.card {
+/* .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
-}
+} */
 
 
-body,
+/* body,
 html {
   margin: 0;
   padding: 0;
   height: 100%;
-}
+} */
 
 #root {
   height: 100%;
