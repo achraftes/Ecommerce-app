@@ -1,8 +1,10 @@
-// import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'; // Importez le fichier CSS
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import './Navbar.css';
 
 function Navbar() {
+    const location = useLocation(); // Récupère l'URL actuelle
+    
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container">
@@ -23,24 +25,29 @@ function Navbar() {
                     id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className="nav-link active"
-                                aria-current="page"
+                            <Link 
+                                className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+                                aria-current={location.pathname === '/' ? "page" : undefined}
                                 to={'/'}>Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link"
+                            <Link 
+                                className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}
                                 to="/about">About</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link"
+                            <Link 
+                                className={`nav-link ${location.pathname === '/products' ? 'active' : ''}`}
                                 to="/products">Products</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link"
+                            <Link 
+                                className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}
                                 to="/services">Services</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle"
+                            <Link 
+                                className={`nav-link dropdown-toggle ${location.pathname.includes('/category') ? 'active' : ''}`}
                                 to="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -48,14 +55,21 @@ function Navbar() {
                                 Categories
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/category/electronics">Electronics</Link></li>
-                                <li><Link className="dropdown-item" to="/category/clothing">Clothing</Link></li>
+                                <li><Link 
+                                    className={`dropdown-item ${location.pathname === '/category/electronics' ? 'active' : ''}`} 
+                                    to="/category/electronics">Electronics</Link></li>
+                                <li><Link 
+                                    className={`dropdown-item ${location.pathname === '/category/clothing' ? 'active' : ''}`} 
+                                    to="/category/clothing">Clothing</Link></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><Link className="dropdown-item" to="/category/all">All Categories</Link></li>
+                                <li><Link 
+                                    className={`dropdown-item ${location.pathname === '/category/all' ? 'active' : ''}`} 
+                                    to="/category/all">All Categories</Link></li>
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link"
+                            <Link 
+                                className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
                                 to="/contact">Contact</Link>
                         </li>
                     </ul>

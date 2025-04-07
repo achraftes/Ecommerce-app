@@ -185,7 +185,7 @@ html {
   margin-bottom: 1rem; 
 }
 
-.card-link {
+/* .card-link {
   text-decoration: none; 
   color: #007bff; 
   font-weight: bold;
@@ -194,9 +194,9 @@ html {
 
 .card-link:hover {
   color: #0056b3; 
-}
+} */
 
-.btn-primary {
+/* .btn-primary {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -209,15 +209,15 @@ html {
 
 .btn-primary:hover {
   background-color: #0056b3;
-}
+} */
 
 
-.IMG {
+/* .IMG {
   width: 80px; 
   height: auto; 
   display: inline-block; 
   color: #fff;
-}
+} */
 
 
 
