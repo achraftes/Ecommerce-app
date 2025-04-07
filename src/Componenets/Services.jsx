@@ -6,7 +6,7 @@ function Services() {
     <div className="container mt-4">
       <div className="row">
         <div className="col-12">
-          <h1 className="display-4">Our Services</h1>
+          <h1 className="about-title">Our Services</h1>
           <p className="lead">We offer a wide range of professional services to meet your needs.</p>
           
           <div className="row mt-5">
