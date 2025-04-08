@@ -1,151 +1,273 @@
-/* Styles pour le footer */
-footer {
-    background-color: #1a1a2e;
-    color: #ffffff;
-    padding: 3rem 0 2rem;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+/* Footer.css */
+
+/* Réinitialisation de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
   
-  .footer-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+  /* Styles de base pour le footer */
+  .bg-gray-900 {
+    background-color: #1a202c;
+  }
+  
+  .text-white {
+    color: #ffffff;
+  }
+  
+  .pt-12 {
+    padding-top: 3rem;
+  }
+  
+  .pb-8 {
+    padding-bottom: 2rem;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Grid layout */
+  .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  
+  @media (min-width: 768px) {
+    .md\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .lg\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  
+  .gap-8 {
     gap: 2rem;
   }
   
-  .footer-section {
-    margin-bottom: 1.5rem;
+  .mb-12 {
+    margin-bottom: 3rem;
   }
   
-  .footer-section h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
+  /* Typographie */
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .mb-4 {
     margin-bottom: 1rem;
-    position: relative;
+  }
+  
+  .text-gray-300 {
+    color: #d1d5db;
+  }
+  
+  /* Flexbox */
+  .flex {
+    display: flex;
+  }
+  
+  .space-x-4 > * + * {
+    margin-left: 1rem;
+  }
+  
+  .space-y-2 > * + * {
+    margin-top: 0.5rem;
+  }
+  
+  .space-y-3 > * + * {
+    margin-top: 0.75rem;
+  }
+  
+  /* Liens et interactions */
+  a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .hover\:text-white:hover {
+    color: #ffffff;
+  }
+  
+  /* Alignement des éléments */
+  .items-start {
+    align-items: flex-start;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .mr-2 {
+    margin-right: 0.5rem;
+  }
+  
+  .mt-1 {
+    margin-top: 0.25rem;
+  }
+  
+  .flex-shrink-0 {
+    flex-shrink: 0;
+  }
+  
+  /* Bordures */
+  .border-t {
+    border-top-width: 1px;
+  }
+  
+  .border-gray-700 {
+    border-color: #374151;
+  }
+  
+  .pt-8 {
+    padding-top: 2rem;
+  }
+  
+  .pb-6 {
+    padding-bottom: 1.5rem;
+  }
+  
+  .max-w-md {
+    max-width: 28rem;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  /* Éléments de formulaire */
+  input {
+    outline: none;
+    border: none;
+  }
+  
+  .flex-grow {
+    flex-grow: 1;
+  }
+  
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .py-2 {
+    padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
   
-  .footer-section h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 40px;
-    height: 2px;
-    background-color: #3498db;
+  .rounded-l {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
   }
   
-  .social-icons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .social-icons a {
-    color: #ffffff;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-  }
-  
-  .social-icons a:hover {
-    color: #3498db;
-  }
-  
-  footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  footer ul li {
-    margin-bottom: 0.7rem;
-  }
-  
-  footer a {
-    color: #b3b3b3;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    display: inline-block;
-  }
-  
-  footer a:hover {
-    color: #ffffff;
-    transform: translateX(3px);
-  }
-  
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-  }
-  
-  .contact-item span:first-child {
-    margin-right: 10px;
-    color: #3498db;
-  }
-  
-  .newsletter-form {
-    display: flex;
-    margin-top: 1rem;
-  }
-  
-  .newsletter-form input {
-    flex-grow: 1;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 4px 0 0 4px;
+  .focus\:outline-none:focus {
     outline: none;
   }
   
-  .newsletter-form button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    padding: 0 1.5rem;
+  .text-gray-900 {
+    color: #1a202c;
+  }
+  
+  /* Bouton */
+  .bg-blue-600 {
+    background-color: #3182ce;
+  }
+  
+  .hover\:bg-blue-700:hover {
+    background-color: #2b6cb0;
+  }
+  
+  .rounded-r {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  /* Section de copyright */
+  .pt-6 {
+    padding-top: 1.5rem;
+  }
+  
+  .text-gray-400 {
+    color: #9ca3af;
+  }
+  
+  /* Ajouts pour améliorer l'apparence */
+  button {
     cursor: pointer;
+    border: none;
+    color: white;
     transition: background-color 0.3s ease;
   }
   
-  .newsletter-form button:hover {
-    background-color: #2980b9;
+  ul {
+    list-style-type: none;
   }
   
-  .footer-bottom {
-    text-align: center;
-    border-top: 1px solid #2a2a4a;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    color: #8a8a9a;
-    font-size: 0.9rem;
+  /* Animation pour les icônes de réseaux sociaux */
+  .flex.space-x-4 a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, color 0.3s ease;
   }
   
-  /* Media queries pour la responsivité */
-  @media (max-width: 768px) {
-    .footer-container {
-      grid-template-columns: 1fr 1fr;
-    }
+  .flex.space-x-4 a:hover {
+    transform: translateY(-3px);
+    color: #3182ce;
   }
   
-  @media (max-width: 480px) {
-    .footer-container {
-      grid-template-columns: 1fr;
-    }
-    
-    .newsletter-form {
-      flex-direction: column;
-    }
-    
-    .newsletter-form input {
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
-    }
-    
-    .newsletter-form button {
-      border-radius: 4px;
-      width: 100%;
-      padding: 0.8rem;
-    }
+  /* Amélioration des effets de survol pour les liens */
+  ul a {
+    position: relative;
+    display: inline-block;
+    padding-left: 0.25rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  ul a:hover {
+    transform: translateX(5px);
+  }
+  
+  /* Effet pour la section newsletter */
+  .border-t.border-gray-700.pt-8 {
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  input::placeholder {
+    color: #6b7280;
+  }
+  
+  /* Animation du bouton */
+  button:active {
+    transform: scale(0.98);
   }
