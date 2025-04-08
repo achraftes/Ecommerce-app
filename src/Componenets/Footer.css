@@ -22,7 +22,7 @@
     font-size: 1.3rem;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #ffcc00;
+    color: #2ecc71; /* Vert */
   }
   
   .footer-text {
@@ -32,7 +32,7 @@
   }
   
   .footer-link {
-    color: #ffcc00;
+    color: #2ecc71; /* Vert */
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s ease-in-out;
@@ -51,7 +51,7 @@
   
   .footer-contact-icon {
     margin-right: 10px;
-    color: #ffcc00;
+    color: #2ecc71; /* Vert */
   }
   
   /* Social Media Icons */
@@ -67,7 +67,7 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: #ffcc00;
+    background-color: #2ecc71; /* Vert */
     color: #1a1a1a;
     border-radius: 50%;
     transition: background 0.3s ease-in-out;
@@ -75,7 +75,7 @@
   
   .footer-social a:hover {
     background-color: #ffffff;
-    color: #ffcc00;
+    color: #2ecc71;
   }
   
   /* Newsletter Section */
@@ -90,7 +90,7 @@
   .footer-newsletter h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-    color: #ffcc00;
+    color: #2ecc71; /* Vert */
   }
   
   .footer-newsletter p {
@@ -110,7 +110,7 @@
   
   .footer-button {
     padding: 12px 20px;
-    background-color: #ffcc00;
+    background-color: #2ecc71; /* Vert */
     color: #1a1a1a;
     border: none;
     cursor: pointer;
@@ -121,7 +121,7 @@
   
   .footer-button:hover {
     background-color: #ffffff;
-    color: #ffcc00;
+    color: #2ecc71;
   }
   
   /* Copyright */
