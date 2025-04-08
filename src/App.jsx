@@ -2,6 +2,7 @@
 import './App.css';
 import About from './Componenets/About';
 import Contact  from './Componenets/Contact';
+import Footer from './Componenets/Footer';
 import Navbar from './Componenets/Navbar'
 import Prodactlist from './Componenets/Prodactlist';
 import ProductDetails from './Componenets/ProductDetails';
@@ -22,6 +23,7 @@ function App() {
         <Route path='services' element={<Services />} />
         <Route path='product/:productId' element={<ProductDetails />} />
       </Routes>
+      <Footer/>
 
     </div>
     </>
