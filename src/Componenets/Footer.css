@@ -1,273 +1,100 @@
-/* Footer.css */
-
-/* Réinitialisation de base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Styles de base pour le footer */
-  .bg-gray-900 {
+/* Styles généraux */
+.footer {
     background-color: #1a202c;
-  }
-  
-  .text-white {
-    color: #ffffff;
-  }
-  
-  .pt-12 {
+    color: white;
     padding-top: 3rem;
-  }
-  
-  .pb-8 {
     padding-bottom: 2rem;
   }
   
-  .container {
+  .footer-container {
     width: 100%;
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
-  }
-  
-  .px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
   }
   
   /* Grid layout */
-  .grid {
+  .footer-grid {
     display: grid;
-  }
-  
-  .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
   }
   
   @media (min-width: 768px) {
-    .md\:grid-cols-2 {
+    .footer-grid-md {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   
   @media (min-width: 1024px) {
-    .lg\:grid-cols-4 {
+    .footer-grid-lg {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   
-  .gap-8 {
-    gap: 2rem;
-  }
-  
-  .mb-12 {
-    margin-bottom: 3rem;
-  }
-  
   /* Typographie */
-  .text-xl {
+  .footer-title {
     font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-  
-  .font-bold {
     font-weight: 700;
-  }
-  
-  .mb-4 {
     margin-bottom: 1rem;
   }
   
-  .text-gray-300 {
+  .footer-text {
     color: #d1d5db;
+    margin-bottom: 1rem;
   }
   
-  /* Flexbox */
-  .flex {
-    display: flex;
-  }
-  
-  .space-x-4 > * + * {
-    margin-left: 1rem;
-  }
-  
-  .space-y-2 > * + * {
-    margin-top: 0.5rem;
-  }
-  
-  .space-y-3 > * + * {
-    margin-top: 0.75rem;
-  }
-  
-  /* Liens et interactions */
-  a {
+  /* Liens et boutons */
+  .footer-link {
     text-decoration: none;
+    color: #d1d5db;
     transition: color 0.3s ease;
   }
   
-  .hover\:text-white:hover {
-    color: #ffffff;
-  }
-  
-  /* Alignement des éléments */
-  .items-start {
-    align-items: flex-start;
-  }
-  
-  .items-center {
-    align-items: center;
-  }
-  
-  .mr-2 {
-    margin-right: 0.5rem;
-  }
-  
-  .mt-1 {
-    margin-top: 0.25rem;
-  }
-  
-  .flex-shrink-0 {
-    flex-shrink: 0;
-  }
-  
-  /* Bordures */
-  .border-t {
-    border-top-width: 1px;
-  }
-  
-  .border-gray-700 {
-    border-color: #374151;
-  }
-  
-  .pt-8 {
-    padding-top: 2rem;
-  }
-  
-  .pb-6 {
-    padding-bottom: 1.5rem;
-  }
-  
-  .max-w-md {
-    max-width: 28rem;
-  }
-  
-  .mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .text-center {
-    text-align: center;
-  }
-  
-  /* Éléments de formulaire */
-  input {
-    outline: none;
-    border: none;
-  }
-  
-  .flex-grow {
-    flex-grow: 1;
-  }
-  
-  .px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .py-2 {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-  
-  .rounded-l {
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-  }
-  
-  .focus\:outline-none:focus {
-    outline: none;
-  }
-  
-  .text-gray-900 {
-    color: #1a202c;
-  }
-  
-  /* Bouton */
-  .bg-blue-600 {
-    background-color: #3182ce;
-  }
-  
-  .hover\:bg-blue-700:hover {
-    background-color: #2b6cb0;
-  }
-  
-  .rounded-r {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-  }
-  
-  .font-medium {
-    font-weight: 500;
-  }
-  
-  /* Section de copyright */
-  .pt-6 {
-    padding-top: 1.5rem;
-  }
-  
-  .text-gray-400 {
-    color: #9ca3af;
-  }
-  
-  /* Ajouts pour améliorer l'apparence */
-  button {
-    cursor: pointer;
-    border: none;
+  .footer-link:hover {
     color: white;
+  }
+  
+  .footer-button {
+    background-color: #3182ce;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
     transition: background-color 0.3s ease;
   }
   
-  ul {
-    list-style-type: none;
+  .footer-button:hover {
+    background-color: #2b6cb0;
   }
   
-  /* Animation pour les icônes de réseaux sociaux */
-  .flex.space-x-4 a {
-    display: inline-flex;
+  /* Section contact */
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-contact-item {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease, color 0.3s ease;
+    margin-bottom: 0.75rem;
   }
   
-  .flex.space-x-4 a:hover {
-    transform: translateY(-3px);
-    color: #3182ce;
+  .footer-contact-icon {
+    margin-right: 0.5rem;
   }
   
-  /* Amélioration des effets de survol pour les liens */
-  ul a {
-    position: relative;
-    display: inline-block;
-    padding-left: 0.25rem;
-    transition: transform 0.3s ease, color 0.3s ease;
+  /* Section copyright */
+  .footer-copyright {
+    border-top: 1px solid #374151;
+    padding-top: 1.5rem;
+    text-align: center;
   }
   
-  ul a:hover {
-    transform: translateX(5px);
+  .footer-newsletter {
+    border-top: 1px solid #374151;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
   }
   
-  /* Effet pour la section newsletter */
-  .border-t.border-gray-700.pt-8 {
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  input::placeholder {
-    color: #6b7280;
-  }
-  
-  /* Animation du bouton */
-  button:active {
-    transform: scale(0.98);
-  }
