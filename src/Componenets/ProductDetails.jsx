@@ -20,6 +20,10 @@ function ProductDetails() {
 
   return (
     <div className="container mt-5">
+      <div className="product-details-intro text-center mb-4">
+        <h2>Product Details</h2>
+        <p>This product is designed with high-quality materials to ensure durability and satisfaction. Perfect for daily use, it meets industry standards and offers excellent value for money.</p>
+      </div>
       <div className="row">
         <div className="col-md-4">
           <img src={product.image} className="img-fluid rounded" alt={product.title} style={{ maxHeight: '300px' }} />
@@ -34,11 +38,6 @@ function ProductDetails() {
           <p><strong>Stock Availability:</strong> {product.stock ? 'In Stock' : 'Out of Stock'}</p>
           <p><strong>Weight:</strong> {product.weight ? `${product.weight} kg` : 'N/A'}</p>
         </div>
-      </div>
-      <hr className="my-4" />
-      <div className="product-details-section mt-4">
-        <h3 className="text-center">More About This Product</h3>
-        <p className="text-center">This product is designed with high-quality materials to ensure durability and satisfaction. Perfect for daily use, it meets industry standards and offers excellent value for money.</p>
       </div>
     </div>
   );
