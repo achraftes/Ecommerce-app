@@ -30,7 +30,15 @@ function ProductDetails() {
           <p style={{ fontSize: '14px' }}>{product.description}</p>
           <h5 className="text-danger">Price: ${product.price}</h5>
           <p className="text-warning">Rating: {product.rating?.rate} ({product.rating?.count} reviews)</p>
+          <p><strong>Brand:</strong> {product.brand || 'N/A'}</p>
+          <p><strong>Stock Availability:</strong> {product.stock ? 'In Stock' : 'Out of Stock'}</p>
+          <p><strong>Weight:</strong> {product.weight ? `${product.weight} kg` : 'N/A'}</p>
         </div>
+      </div>
+      <hr className="my-4" />
+      <div className="product-details-section mt-4">
+        <h3 className="text-center">More About This Product</h3>
+        <p className="text-center">This product is designed with high-quality materials to ensure durability and satisfaction. Perfect for daily use, it meets industry standards and offers excellent value for money.</p>
       </div>
     </div>
   );
