@@ -64,7 +64,7 @@ function Navbar() {
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><Link 
                                     className={`dropdown-item ${location.pathname === '/category/all' ? 'active' : ''}`} 
-                                    to="/category/all">All Categories</Link></li>
+                                    to="/products">All Categories</Link></li>
                             </ul>
                         </li>
                         <li className="nav-item">
