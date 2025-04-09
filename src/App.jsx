@@ -18,6 +18,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<> <Slider /> <Prodactlist /> </>} />
+        <Route path='/products' element={<Prodactlist />} />
         <Route path='about' element={<About />} />
         <Route path='contact' element={<Contact />} />
         <Route path='services' element={<Services />} />
