@@ -74,22 +74,30 @@ function ProductDetails() {
       ) : (
         <div className="payment-form">
           <h2 className="text-center">Enter Payment Details</h2>
-          <form>
-            <div className="mb-3">
-              <label className="form-label">Card Number</label>
-              <input type="text" className="form-control" placeholder="Enter your card number" required />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Expiration Date</label>
-              <input type="text" className="form-control" placeholder="MM/YY" required />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">CVV</label>
-              <input type="text" className="form-control" placeholder="Enter CVV" required />
-            </div>
-            <button type="submit" className="btn btn-success">Confirm Payment</button>
-            <button type="button" className="btn btn-secondary ms-2" onClick={() => setShowPaymentForm(false)}>Cancel</button>
-          </form>
+          <div className="card shadow-lg p-4 mb-4">
+            <form>
+              <div className="mb-3">
+                <label className="form-label">Card Number</label>
+                <input type="text" className="form-control form-control-lg" placeholder="Enter your card number" required />
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="mb-3">
+                    <label className="form-label">Expiration Date</label>
+                    <input type="text" className="form-control" placeholder="MM/YY" required />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="mb-3">
+                    <label className="form-label">CVV</label>
+                    <input type="text" className="form-control" placeholder="Enter CVV" required />
+                  </div>
+                </div>
+              </div>
+              <button type="submit" className="btn btn-success btn-lg w-100">Confirm Payment</button>
+              <button type="button" className="btn btn-secondary btn-lg w-100 mt-2" onClick={() => setShowPaymentForm(false)}>Cancel</button>
+            </form>
+          </div>
         </div>
       )}
     </div>
