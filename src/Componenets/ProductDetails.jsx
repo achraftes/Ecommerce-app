@@ -26,7 +26,6 @@ function ProductDetails() {
         <>
           <div className="product-details-intro text-center mb-4">
             <h2>Product Details</h2>
-            <p>This product is designed with high-quality materials to ensure durability and satisfaction. Perfect for daily use, it meets industry standards and offers excellent value for money.</p>
           </div>
           <div className="row">
             <div className="col-md-4">

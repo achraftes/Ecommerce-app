@@ -93,6 +93,16 @@
   background: rgba(46, 204, 113, 0.1);
 }
 
+/* Espacement entre les éléments de la liste */
+.navbar-nav .nav-item {
+  margin-right: 20px;  /* Ajoute de l'espace entre les éléments */
+}
+
+/* Si vous voulez aussi un espacement à droite du dernier élément */
+.navbar-nav .nav-item:last-child {
+  margin-right: 0;
+}
+
 .dropdown-menu {
   background: rgba(44, 62, 80, 0.95);
   border: 1px solid rgba(46, 204, 113, 0.3);
@@ -148,7 +158,7 @@
     margin-top: 10px;
     padding: 20px;
   }
-  
+
   .nav-link {
     margin: 8px 0;
   }
