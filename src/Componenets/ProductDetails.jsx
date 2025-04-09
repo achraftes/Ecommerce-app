@@ -6,6 +6,7 @@ function ProductDetails() {
   const api_url = "https://fakestoreapi.com/products";
   const [product, setProduct] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
   const { productId } = useParams();
 
   useEffect(() => {
@@ -44,7 +45,7 @@ function ProductDetails() {
             </div>
           </div>
         </>
-      ) : (
+      ) : !showPaymentForm ? (
         <div className="purchase-form">
           <h2 className="text-center">Purchase Product</h2>
           <p><strong>Product:</strong> {product.title}</p>
@@ -66,8 +67,28 @@ function ProductDetails() {
               <label className="form-label">Quantity</label>
               <input type="number" className="form-control" min="1" defaultValue="1" required />
             </div>
-            <button type="submit" className="btn btn-primary">Confirm Purchase</button>
+            <button type="button" className="btn btn-primary" onClick={() => setShowPaymentForm(true)}>Proceed to Payment</button>
             <button type="button" className="btn btn-secondary ms-2" onClick={() => setShowForm(false)}>Cancel</button>
+          </form>
+        </div>
+      ) : (
+        <div className="payment-form">
+          <h2 className="text-center">Enter Payment Details</h2>
+          <form>
+            <div className="mb-3">
+              <label className="form-label">Card Number</label>
+              <input type="text" className="form-control" placeholder="Enter your card number" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Expiration Date</label>
+              <input type="text" className="form-control" placeholder="MM/YY" required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">CVV</label>
+              <input type="text" className="form-control" placeholder="Enter CVV" required />
+            </div>
+            <button type="submit" className="btn btn-success">Confirm Payment</button>
+            <button type="button" className="btn btn-secondary ms-2" onClick={() => setShowPaymentForm(false)}>Cancel</button>
           </form>
         </div>
       )}
