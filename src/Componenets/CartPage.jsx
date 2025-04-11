@@ -32,7 +32,7 @@ function CartPage() {
                 <h2>Votre panier est vide</h2>
                 <p>N'hésitez pas à parcourir nos produits et à ajouter des articles.</p>
                 <Link to="/products" className="btn btn-primary">Voir les produits</Link>
-            </div>
+            </div> 
         );
     }
 
