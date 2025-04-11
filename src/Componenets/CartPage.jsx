@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import  { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function CartPage() {
     const [cartItems, setCartItems] = useState(() => {
@@ -18,6 +18,12 @@ function CartPage() {
 
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => total + item.price, 0).toFixed(2);
+    };
+
+    const navigate = useNavigate();
+
+    const handleCheckout = () => {
+        navigate('/checkout'); // Navigate to the new CheckoutPage
     };
 
     if (cartItems.length === 0) {
@@ -41,7 +47,6 @@ function CartPage() {
                             <div>
                                 <strong>{item.titel}</strong>
                                 <p className="mb-0">Prix: {item.price}$</p>
-                                {/* Vous pouvez afficher d'autres informations du produit ici */}
                             </div>
                         </div>
                         <button className="btn btn-danger btn-sm" onClick={() => handleRemoveFromCart(item.id)}>
@@ -52,7 +57,7 @@ function CartPage() {
             </ul>
             <div className="d-flex justify-content-between">
                 <h4>Total: ${calculateTotalPrice()}</h4>
-                <button className="btn btn-success">Passer à la caisse</button>
+                <button className="btn btn-success" onClick={handleCheckout}>Passer à la caisse</button>
             </div>
         </div>
     );
