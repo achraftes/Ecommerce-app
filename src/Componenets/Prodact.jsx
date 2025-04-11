@@ -8,12 +8,19 @@ function Prodact(props) {
     const [isAdded, setIsAdded] = useState(false);
 
     const handleAddToCart = () => {
-        // Ici, vous implémenterez la logique pour ajouter le produit au panier.
-        // Cela pourrait impliquer la mise à jour d'un état global (via Context API ou Redux)
-        // ou l'appel d'une fonction passée en props pour gérer le panier.
+        // Get existing cart items from localStorage
+        const existingCart = localStorage.getItem('cart');
+        const cart = existingCart ? JSON.parse(existingCart) : [];
+
+        // Add the current product to the cart
+        cart.push(propst);
+
+        // Save the updated cart back to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        setIsAdded(true); // Indicate that the product has been added
         console.log(`Produit "${propst.titel}" ajouté au panier.`);
-        setIsAdded(true); // Indiquer que le produit a été ajouté
-        // Vous pouvez également rediriger l'utilisateur vers la page du panier ici si vous le souhaitez.
+        // You might want to provide visual feedback to the user here.
     };
 
     return (
