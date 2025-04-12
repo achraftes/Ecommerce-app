@@ -1,12 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 
 function Navbar() {
     const location = useLocation();
+    const navigate = useNavigate();
     const [cartCount, setCartCount] = useState(0);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const storedCart = localStorage.getItem('cart');
@@ -22,6 +24,18 @@ function Navbar() {
         window.addEventListener('storage', handleStorageChange);
         return () => window.removeEventListener('storage', handleStorageChange);
     }, []);
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        if (searchTerm.trim()) {
+            navigate(`/products?search=${searchTerm}`);
+            setSearchTerm(''); // Clear the search term after submission
+        }
+    };
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -58,9 +72,18 @@ function Navbar() {
                         </li>
                     </ul>
                     <div className="d-flex align-items-center ms-3">
-                        <form className="d-flex me-2" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                        <form className="d-flex me-2" role="search" onSubmit={handleSearchSubmit}>
+                            <input
+                                className="form-control me-2"
+                                type="search"
+                                placeholder="Search products..."
+                                aria-label="Search"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                            />
+                            <button className="btn btn-outline-success" type="submit">
+                                <FontAwesomeIcon icon={faSearch} />
+                            </button>
                         </form>
                         <Link to="/cart" className="cart-link">
                             <div className="icon-wrapper">
