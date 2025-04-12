@@ -76,7 +76,7 @@ function Navbar() {
                             <input
                                 className="form-control me-2"
                                 type="search"
-                                placeholder="Search products..."
+                                placeholder="Search products...."
                                 aria-label="Search"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
