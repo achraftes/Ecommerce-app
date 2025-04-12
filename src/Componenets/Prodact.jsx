@@ -8,7 +8,7 @@ function Prodact(props) {
  const [isAdded, setIsAdded] = useState(false);
 
     const handleAddToCart = () => {
-        // Get existing cart items from localStorage
+
         const existingCart = localStorage.getItem('cart');
         const cart = existingCart ? JSON.parse(existingCart) : [];
 
