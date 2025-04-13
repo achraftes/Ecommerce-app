@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 function CheckoutPage() {
     const [cartItems, setCartItems] = useState(() => {
@@ -31,14 +33,111 @@ function CheckoutPage() {
         setPaymentInfo({ ...paymentInfo, [e.target.name]: e.target.value });
     };
 
+    // Fonction pour générer et télécharger le PDF de facture
+    const generateInvoicePDF = () => {
+        const doc = new jsPDF();
+        const totalPrice = calculateTotalPrice();
+        const date = new Date().toLocaleDateString();
+        const orderNumber = Math.floor(100000 + Math.random() * 900000); // Génère un numéro de commande aléatoire
+
+        // En-tête de la facture
+        doc.setFontSize(22);
+        doc.text("Facture de commande", 105, 20, { align: 'center' });
+        
+        doc.setFontSize(12);
+        doc.text(`Numéro de commande: #${orderNumber}`, 20, 40);
+        doc.text(`Date: ${date}`, 20, 50);
+        
+        // Informations du client
+        doc.setFontSize(14);
+        doc.text("Informations du client", 20, 70);
+        doc.setFontSize(12);
+        doc.text(`Nom: ${shippingInfo.fullName}`, 20, 80);
+        doc.text(`Email: ${shippingInfo.email}`, 20, 90);
+        doc.text(`Adresse de livraison: ${shippingInfo.address}`, 20, 100);
+        
+        // Détails des produits
+        const tableColumn = ["Produit", "Prix"];
+        const tableRows = [];
+        
+        cartItems.forEach(item => {
+            const productData = [
+                item.titel,
+                `$${item.price.toFixed(2)}`
+            ];
+            tableRows.push(productData);
+        });
+        
+        // Ajout du tableau des produits avec autoTable importé séparément
+        doc.setFontSize(14);
+        doc.text("Détails des produits", 20, 120);
+        
+        // Utiliser autoTable comme fonction importée
+        autoTable(doc, {
+            startY: 130,
+            head: [tableColumn],
+            body: tableRows,
+        });
+        
+        // Total - en accédant aux propriétés après création du tableau
+        let finalY = 130;
+        if (doc.lastAutoTable) {
+            finalY = doc.lastAutoTable.finalY + 10;
+        } else {
+            finalY = 130 + (tableRows.length * 10) + 20;
+        }
+        
+        doc.setFontSize(14);
+        doc.text(`Total: $${totalPrice}`, 150, finalY, { align: 'right' });
+        
+        // Informations de paiement
+        doc.setFontSize(14);
+        doc.text("Informations de paiement", 20, finalY + 20);
+        doc.setFontSize(12);
+        
+        // Protection des infos de carte - ne montrer que les 4 derniers chiffres si disponibles
+        let maskedCardNumber = "****";
+        if (paymentInfo.cardNumber.length >= 4) {
+            maskedCardNumber = `**** **** **** ${paymentInfo.cardNumber.slice(-4)}`;
+        }
+        doc.text(`Carte: ${maskedCardNumber}`, 20, finalY + 30);
+        
+        // Message de remerciement
+        doc.setFontSize(12);
+        doc.text("Merci pour votre commande!", 105, finalY + 50, { align: 'center' });
+        
+        // Télécharger le PDF
+        doc.save(`facture_${orderNumber}.pdf`);
+    };
+
     const handleSubmitOrder = (e) => {
         e.preventDefault();
+        
+        // Vérification que les champs sont bien remplis
+        if (!shippingInfo.fullName || !shippingInfo.email || !shippingInfo.address || 
+            !paymentInfo.cardNumber || !paymentInfo.expiryDate || !paymentInfo.cvv) {
+            alert('Veuillez remplir tous les champs obligatoires.');
+            return;
+        }
+        
         console.log('Order submitted:', { cartItems, shippingInfo, paymentInfo });
-        // In a real application, you would send this data to your backend for processing.
-        alert('Order submitted successfully!');
-        localStorage.removeItem('cart'); // Clear the cart after submission
-        setCartItems([]);
-        // Optionally, redirect the user to an order confirmation page.
+        
+        try {
+            // Générer et télécharger le PDF
+            generateInvoicePDF();
+            
+            // Afficher un message de confirmation
+            alert('Commande confirmée! Votre facture va être téléchargée automatiquement.');
+            
+            // Effacer le panier
+            localStorage.removeItem('cart');
+            setCartItems([]);
+            
+            // Optionnellement, redirigez l'utilisateur vers une page de confirmation de commande
+        } catch (error) {
+            console.error("Erreur lors de la génération du PDF:", error);
+            alert("Une erreur s'est produite lors de la génération de votre facture. Veuillez réessayer.");
+        }
     };
 
     if (cartItems.length === 0) {
@@ -124,6 +223,8 @@ function CheckoutPage() {
                         name="cardNumber"
                         value={paymentInfo.cardNumber}
                         onChange={handlePaymentChange}
+                        placeholder="XXXX XXXX XXXX XXXX"
+                        maxLength="19"
                         required
                     />
                 </div>
@@ -138,6 +239,7 @@ function CheckoutPage() {
                                 value={paymentInfo.expiryDate}
                                 onChange={handlePaymentChange}
                                 placeholder="MM/YY"
+                                maxLength="5"
                                 required
                             />
                         </div>
@@ -151,6 +253,8 @@ function CheckoutPage() {
                                 name="cvv"
                                 value={paymentInfo.cvv}
                                 onChange={handlePaymentChange}
+                                placeholder="XXX"
+                                maxLength="4"
                                 required
                             />
                         </div>
