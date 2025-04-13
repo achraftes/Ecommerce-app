@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Youtube, Linkedin } from 'lucide-react'; // Importez les nouvelles icônes
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Youtube, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -17,7 +17,7 @@ const Footer = () => {
               Notre mission est de vous offrir le meilleur service client
               avec des produits exceptionnels.
             </p>
-            <div className="flex space-x-4"> {/* Utilisation de space-x-4 pour l'espace */}
+            <div className="footer-social"> {/* MODIFIÉ */}
               <a href="#" className="footer-link">
                 <Facebook size={20} />
               </a>
@@ -28,10 +28,10 @@ const Footer = () => {
                 <Twitter size={20} />
               </a>
               <a href="#" className="footer-link">
-                <Youtube size={20} /> {/* Ajout de l'icône YouTube */}
+                <Youtube size={20} />
               </a>
               <a href="#" className="footer-link">
-                <Linkedin size={20} /> {/* Ajout de l'icône LinkedIn */}
+                <Linkedin size={20} />
               </a>
             </div>
           </div>

@@ -70,7 +70,8 @@
   background-color: #2ecc71; /* Vert */
   color: #1a1a1a;
   border-radius: 50%;
-  transition: background 0.3s ease-in-out;
+  font-size: 18px;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .footer-social a:hover {
@@ -106,6 +107,7 @@
   border-radius: 5px 0 0 5px;
   font-size: 1rem;
   color: #dddddd;
+  background-color: #1a1a1a;
 }
 
 .footer-button {
@@ -116,7 +118,7 @@
   cursor: pointer;
   font-size: 1rem;
   border-radius: 0 5px 5px 0;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .footer-button:hover {
@@ -157,5 +159,11 @@
     width: 100%;
     border-radius: 5px;
     margin-top: 10px;
+  }
+
+  .footer-newsletter form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
