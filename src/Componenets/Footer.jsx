@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Youtube, Linkedin } from 'lucide-react'; // Importez les nouvelles icônes
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="footer-container">
         {/* Section principale */}
         <div className="footer-grid footer-grid-md footer-grid-lg">
-          
+
           {/* À propos */}
           <div>
             <h3 className="footer-title">Notre Boutique</h3>
@@ -17,7 +17,7 @@ const Footer = () => {
               Notre mission est de vous offrir le meilleur service client
               avec des produits exceptionnels.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4"> {/* Utilisation de space-x-4 pour l'espace */}
               <a href="#" className="footer-link">
                 <Facebook size={20} />
               </a>
@@ -27,9 +27,15 @@ const Footer = () => {
               <a href="#" className="footer-link">
                 <Twitter size={20} />
               </a>
+              <a href="#" className="footer-link">
+                <Youtube size={20} /> {/* Ajout de l'icône YouTube */}
+              </a>
+              <a href="#" className="footer-link">
+                <Linkedin size={20} /> {/* Ajout de l'icône LinkedIn */}
+              </a>
             </div>
           </div>
-          
+
           {/* Liens rapides */}
           <div>
             <h3 className="footer-title">Liens Rapides</h3>
@@ -41,7 +47,7 @@ const Footer = () => {
               <li><a href="#" className="footer-link">Blog</a></li>
             </ul>
           </div>
-          
+
           {/* Service client */}
           <div>
             <h3 className="footer-title">Service Client</h3>
@@ -53,7 +59,7 @@ const Footer = () => {
               <li><a href="#" className="footer-link">Politique de Retour</a></li>
             </ul>
           </div>
-          
+
           {/* Contact */}
           <div>
             <h3 className="footer-title">Contactez-nous</h3>
@@ -73,7 +79,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        
+
         {/* Section newsletter */}
         <div className="footer-newsletter">
           <div className="max-w-md mx-auto text-center">
@@ -91,7 +97,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Copyright */}
         <div className="footer-copyright">
           <p className="footer-text">
