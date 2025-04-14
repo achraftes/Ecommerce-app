@@ -4,18 +4,20 @@
     position: fixed;
     bottom: 80px;
     right: 20px;
-    width: 400px; /* Augmenter la largeur */
-    height: 450px; /* Augmenter la hauteur */
+    width: 400px; /* Increase width */
+    height: 450px; /* Increase height */
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    display: flex;
+    flex-direction: column; /* Allows stacking elements vertically */
 }
 
 .chatbot-header {
-    padding: 12px; /* Augmenter le padding */
+    padding: 12px; /* Increase padding */
     background-color: #007bff;
     color: white;
     display: flex;
@@ -26,42 +28,47 @@
 }
 
 .chatbot-body {
-    max-height: 320px; /* Augmenter la hauteur des messages */
+    flex: 1; /* Allow the body to take available space */
+    max-height: 320px; /* Increase the height of messages */
     overflow-y: auto;
-    padding: 15px; /* Plus de padding */
+    padding: 15px; /* More padding */
     background: #f9f9f9;
 }
 
 .message {
-    margin-bottom: 10px; /* Espacement plus large entre les messages */
-    padding: 10px; /* Augmenter le padding */
+    margin-bottom: 10px; /* Larger spacing between messages */
+    padding: 10px; /* Increase padding */
     border-radius: 8px;
-    max-width: 85%; /* Réduire légèrement la largeur max des messages */
+    max-width: 85%; /* Slightly reduce the max width of messages */
 }
 
 .message.user {
     background-color: #d1e7dd;
     align-self: flex-end;
-    color: #0f5132; /* Couleur du texte de l'utilisateur */
+    color: #0f5132; /* User text color */
 }
 
 .message.bot {
     background-color: #f8d7da;
     align-self: flex-start;
-    color: #721c24; /* Couleur du texte du bot */
+    color: #721c24; /* Bot text color */
 }
 
 .chatbot-input {
     display: flex;
-    padding: 15px; /* Augmenter le padding */
+    padding: 15px; /* Increase padding */
     border-top: 1px solid #ddd;
+    position: absolute; /* Fix the input field at the bottom */
+    bottom: 0;
+    width: 100%;
+    background-color: white;
 }
 
 .chatbot-input input {
     flex: 1;
     border: none;
     outline: none;
-    padding: 10px; /* Augmenter la taille du champ de texte */
+    padding: 10px; /* Increase text field size */
     border-radius: 5px;
     margin-right: 5px;
     background: #f1f1f1;
@@ -69,24 +76,24 @@
 
 .chatbot-input button {
     border: none;
-    padding: 10px 14px; /* Augmenter la taille du bouton */
+    padding: 10px 14px; /* Increase button size */
     background: #007bff;
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
-/* Style pour le bouton X qui ferme la fenêtre de chat */
+/* Style for the close button (X) to close the chat window */
 .close-btn {
     background: none;
     border: none;
     color: white;
-    font-size: 20px; /* Agrandir la taille de la croix */
+    font-size: 20px; /* Larger close button */
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 .close-btn:hover {
-    color: #ff4d4d; /* Couleur rouge lors du survol */
+    color: #ff4d4d; /* Red color on hover */
 }
