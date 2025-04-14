@@ -3,15 +3,14 @@ import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faSearch, faComments } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
+import ChatBot from './ChatBot'; // ✅ Import du composant de chat
 
 function Navbar() {
     const location = useLocation();
     const navigate = useNavigate();
     const [cartCount, setCartCount] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
-    const [showChat, setShowChat] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [userMessage, setUserMessage] = useState('');
+    const [showChat, setShowChat] = useState(false); // ✅ Contrôle de l'affichage du chat
 
     useEffect(() => {
         const storedCart = localStorage.getItem('cart');
@@ -38,24 +37,6 @@ function Navbar() {
             navigate(`/products?search=${searchTerm}`);
             setSearchTerm('');
         }
-    };
-
-    const handleSendMessage = (e) => {
-        e.preventDefault();
-        if (!userMessage.trim()) return;
-
-        const userMsg = { sender: 'user', text: userMessage };
-        setMessages(prev => [...prev, userMsg]);
-
-        setTimeout(() => {
-            const botMsg = {
-                sender: 'bot',
-                text: `Je suis un robot. Tu as dit : "${userMessage}"`,
-            };
-            setMessages(prev => [...prev, botMsg]);
-        }, 500);
-
-        setUserMessage('');
     };
 
     return (
@@ -114,41 +95,21 @@ function Navbar() {
                                 </div>
                             </Link>
                             <button
-                                className="btn btn-outline-primary"
-                                onClick={() => setShowChat(!showChat)}
-                                title="Chat"
-                            >
-                                <FontAwesomeIcon icon={faComments} />
-                            </button>
+    className="btn"
+    style={{ backgroundColor: '#28a745', color: 'white' }}
+    onClick={() => setShowChat(!showChat)}
+    title="Chat"
+>
+    <FontAwesomeIcon icon={faComments} />
+</button>
+
                         </div>
                     </div>
                 </div>
             </nav>
 
-            {showChat && (
-                <div className="chatbot-window">
-                    <div className="chatbot-header">
-                        <strong>Assistant Virtuel</strong>
-                        <button onClick={() => setShowChat(false)}>X</button>
-                    </div>
-                    <div className="chatbot-body">
-                        {messages.map((msg, idx) => (
-                            <div key={idx} className={`message ${msg.sender}`}>
-                                {msg.text}
-                            </div>
-                        ))}
-                    </div>
-                    <form className="chatbot-input" onSubmit={handleSendMessage}>
-                        <input
-                            type="text"
-                            placeholder="Écrivez un message..."
-                            value={userMessage}
-                            onChange={(e) => setUserMessage(e.target.value)}
-                        />
-                        <button type="submit">Envoyer</button>
-                    </form>
-                </div>
-            )}
+            {/* ✅ Affichage du composant de chat */}
+            <ChatBot showChat={showChat} setShowChat={setShowChat} />
         </>
     );
 }
