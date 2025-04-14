@@ -1,3 +1,5 @@
+/* ChatBot.css */
+
 .chatbot-window {
     position: fixed;
     bottom: 80px;
@@ -7,7 +9,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
@@ -18,6 +20,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .chatbot-body {
@@ -67,4 +71,30 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Style pour le bouton X qui ferme la fenêtre de chat */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4d4d; /* Couleur rouge lors du survol */
+}
+
+/* Améliorer la présentation des messages */
+.message.bot {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.message.user {
+    background-color: #d1e7dd;
+    color: #0f5132;
 }

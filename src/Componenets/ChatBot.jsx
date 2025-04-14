@@ -30,7 +30,7 @@ function ChatBot({ showChat, setShowChat }) {
         <div className="chatbot-window">
             <div className="chatbot-header">
                 <strong>Assistant Virtuel</strong>
-                <button onClick={() => setShowChat(false)}>X</button>
+                <button onClick={() => setShowChat(false)} className="close-btn">X</button>
             </div>
             <div className="chatbot-body">
                 {messages.map((msg, idx) => (
