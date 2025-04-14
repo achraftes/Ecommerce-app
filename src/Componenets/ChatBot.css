@@ -41,7 +41,7 @@
     margin-bottom: 15px; /* Espacement plus large entre les messages */
     padding: 12px; /* Augmenter le padding */
     border-radius: 12px; /* Coins arrondis plus prononcés */
-    max-width: 85%; /* Réduire légèrement la largeur maximale des messages */
+    max-width: 75%; /* Réduire la largeur maximale des messages */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police moderne */
     font-size: 14px; /* Taille de police légèrement plus grande */
     line-height: 1.6; /* Espacement des lignes pour une meilleure lisibilité */
@@ -120,6 +120,4 @@
     transition: color 0.3s;
 }
 
-.close-btn:hover {
-    color: #ff4d4d; /* Changer la couleur en rouge au survol */
-}
+
