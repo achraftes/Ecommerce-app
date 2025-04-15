@@ -108,7 +108,7 @@ function CheckoutPage() {
             
             // On ne vide PAS le panier
             // Redirection optionnelle :
-            // window.location.href = '/order-confirmation';
+            // window.location.href = '/order-confirmation'
             
         } catch (error) {
             console.error("Erreur PDF:", error);

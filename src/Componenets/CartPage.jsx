@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 function CartPage() {
@@ -23,7 +23,7 @@ function CartPage() {
     const navigate = useNavigate();
 
     const handleCheckout = () => {
-        navigate('/checkout'); // Navigate to the new CheckoutPage
+        navigate('/checkout');
     };
 
     if (cartItems.length === 0) {
@@ -43,9 +43,17 @@ function CartPage() {
                 {cartItems.map(item => (
                     <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
                         <div className="d-flex align-items-center">
-                            <img src={item.image} alt={item.titel} style={{ width: '50px', height: '50px', marginRight: '10px', objectFit: 'cover' }} />
+                            <Link to={`/products/${item.id}`}>
+                                <img 
+                                    src={item.image} 
+                                    alt={item.titel} 
+                                    style={{ width: '50px', height: '50px', marginRight: '10px', objectFit: 'cover' }} 
+                                />
+                            </Link>
                             <div>
-                                <strong>{item.titel}</strong>
+                                <Link to={`/products/${item.id}`} className="text-decoration-none text-dark">
+                                    <strong>{item.titel}</strong>
+                                </Link>
                                 <p className="mb-0">Prix: {item.price}$</p>
                             </div>
                         </div>
