@@ -24,9 +24,9 @@ function Prodact(props) {
 
   return (
     <div className="card h-100">
-      <img src={propst.image} className="card-img-top" alt={propst.titel} />
+      <img src={propst.image} className="card-img-top" alt={propst.title} />
       <div className="card-body">
-        <h5 className="card-title">{propst.titel}</h5>
+        <h5 className="card-title">{propst.title}</h5>
         <p className="card-text">{propst.description}</p>
         <p>Price: {propst.price}$</p>
         <div className="d-flex justify-content-between align-items-center">

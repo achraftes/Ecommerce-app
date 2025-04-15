@@ -46,13 +46,13 @@ function CartPage() {
                             <Link to={`/products/${item.id}`}>
                                 <img 
                                     src={item.image} 
-                                    alt={item.titel} 
+                                    alt={item.title} 
                                     style={{ width: '50px', height: '50px', marginRight: '10px', objectFit: 'cover' }} 
                                 />
                             </Link>
                             <div>
                                 <Link to={`/products/${item.id}`} className="text-decoration-none text-dark">
-                                    <strong>{item.titel}</strong>
+                                    <strong>{item.title}</strong>
                                 </Link>
                                 <p className="mb-0">Prix: {item.price}$</p>
                             </div>
