@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
 function CheckoutPage() {
-    const [cartItems, setCartItems] = useState(() => {
+    const [cartItems] = useState(() => {
         const storedCart = localStorage.getItem('cart');
         return storedCart ? JSON.parse(storedCart) : [];
     });
@@ -33,14 +33,12 @@ function CheckoutPage() {
         setPaymentInfo({ ...paymentInfo, [e.target.name]: e.target.value });
     };
 
-    // Fonction pour générer et télécharger le PDF de facture
     const generateInvoicePDF = () => {
         const doc = new jsPDF();
         const totalPrice = calculateTotalPrice();
         const date = new Date().toLocaleDateString();
-        const orderNumber = Math.floor(100000 + Math.random() * 900000); // Génère un numéro de commande aléatoire
+        const orderNumber = Math.floor(100000 + Math.random() * 900000);
 
-        // En-tête de la facture
         doc.setFontSize(22);
         doc.text("Facture de commande", 105, 20, { align: 'center' });
         
@@ -48,7 +46,6 @@ function CheckoutPage() {
         doc.text(`Numéro de commande: #${orderNumber}`, 20, 40);
         doc.text(`Date: ${date}`, 20, 50);
         
-        // Informations du client
         doc.setFontSize(14);
         doc.text("Informations du client", 20, 70);
         doc.setFontSize(12);
@@ -56,7 +53,6 @@ function CheckoutPage() {
         doc.text(`Email: ${shippingInfo.email}`, 20, 90);
         doc.text(`Adresse de livraison: ${shippingInfo.address}`, 20, 100);
         
-        // Détails des produits
         const tableColumn = ["Produit", "Prix"];
         const tableRows = [];
         
@@ -68,75 +64,55 @@ function CheckoutPage() {
             tableRows.push(productData);
         });
         
-        // Ajout du tableau des produits avec autoTable importé séparément
         doc.setFontSize(14);
         doc.text("Détails des produits", 20, 120);
         
-        // Utiliser autoTable comme fonction importée
         autoTable(doc, {
             startY: 130,
             head: [tableColumn],
             body: tableRows,
         });
         
-        // Total - en accédant aux propriétés après création du tableau
-        let finalY = 130;
-        if (doc.lastAutoTable) {
-            finalY = doc.lastAutoTable.finalY + 10;
-        } else {
-            finalY = 130 + (tableRows.length * 10) + 20;
-        }
+        let finalY = doc.lastAutoTable?.finalY + 10 || 130 + (tableRows.length * 10) + 20;
         
         doc.setFontSize(14);
         doc.text(`Total: $${totalPrice}`, 150, finalY, { align: 'right' });
         
-        // Informations de paiement
         doc.setFontSize(14);
         doc.text("Informations de paiement", 20, finalY + 20);
         doc.setFontSize(12);
         
-        // Protection des infos de carte - ne montrer que les 4 derniers chiffres si disponibles
-        let maskedCardNumber = "****";
-        if (paymentInfo.cardNumber.length >= 4) {
-            maskedCardNumber = `**** **** **** ${paymentInfo.cardNumber.slice(-4)}`;
-        }
+        const maskedCardNumber = paymentInfo.cardNumber.length >= 4 
+            ? `**** **** **** ${paymentInfo.cardNumber.slice(-4)}`
+            : "****";
         doc.text(`Carte: ${maskedCardNumber}`, 20, finalY + 30);
         
-        // Message de remerciement
         doc.setFontSize(12);
         doc.text("Merci pour votre commande!", 105, finalY + 50, { align: 'center' });
         
-        // Télécharger le PDF
         doc.save(`facture_${orderNumber}.pdf`);
     };
 
     const handleSubmitOrder = (e) => {
         e.preventDefault();
         
-        // Vérification que les champs sont bien remplis
         if (!shippingInfo.fullName || !shippingInfo.email || !shippingInfo.address || 
             !paymentInfo.cardNumber || !paymentInfo.expiryDate || !paymentInfo.cvv) {
             alert('Veuillez remplir tous les champs obligatoires.');
             return;
         }
         
-        console.log('Order submitted:', { cartItems, shippingInfo, paymentInfo });
-        
         try {
-            // Générer et télécharger le PDF
             generateInvoicePDF();
+            alert('Commande confirmée! Votre facture a été téléchargée.');
             
-            // Afficher un message de confirmation
-            alert('Commande confirmée! Votre facture va être téléchargée automatiquement.');
+            // On ne vide PAS le panier
+            // Redirection optionnelle :
+            // window.location.href = '/order-confirmation';
             
-            // Effacer le panier
-            localStorage.removeItem('cart');
-            setCartItems([]);
-            
-            // Optionnellement, redirigez l'utilisateur vers une page de confirmation de commande
         } catch (error) {
-            console.error("Erreur lors de la génération du PDF:", error);
-            alert("Une erreur s'est produite lors de la génération de votre facture. Veuillez réessayer.");
+            console.error("Erreur PDF:", error);
+            alert("Erreur lors de la génération de la facture.");
         }
     };
 
@@ -144,7 +120,6 @@ function CheckoutPage() {
         return (
             <div className="container mt-5">
                 <h2>Votre panier est vide</h2>
-                <p>Veuillez ajouter des articles à votre panier avant de passer à la caisse.</p>
                 <Link to="/products" className="btn btn-primary">Voir les produits</Link>
             </div>
         );
@@ -152,117 +127,126 @@ function CheckoutPage() {
 
     return (
         <div className="container mt-5">
-            <h2>Checkout</h2>
-            <p>Veuillez vérifier les articles dans votre panier:</p>
-            <ul className="list-group mb-3">
-                {cartItems.map(item => (
-                    <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
-                        <div className="d-flex align-items-center">
-                            {item.image && (
-                                <img
-                                    src={item.image}
-                                    alt={item.titel}
-                                    style={{ width: '50px', height: '50px', marginRight: '10px', objectFit: 'cover' }}
-                                />
-                            )}
-                            <div>
-                                <strong>{item.titel}</strong>
-                                <p className="mb-0">Prix: ${item.price}</p>
+            <h2>Finalisation de commande</h2>
+            <div className="mb-4">
+                <h4>Récapitulatif du panier</h4>
+                <ul className="list-group">
+                    {cartItems.map(item => (
+                        <li key={item.id} className="list-group-item">
+                            <div className="d-flex align-items-center">
+                                <Link to={`/products/${item.id}`}>
+                                    <img
+                                        src={item.image}
+                                        alt={item.titel}
+                                        style={{ width: '60px', height: '60px', marginRight: '15px', objectFit: 'cover' }}
+                                    />
+                                </Link>
+                                <div>
+                                    <Link to={`/products/${item.id}`} className="text-decoration-none text-dark">
+                                        <h5 className="mb-1">{item.titel}</h5>
+                                    </Link>
+                                    <p className="mb-0">Prix unitaire: ${item.price}</p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                ))}
-                <li className="list-group-item d-flex justify-content-between">
-                    <strong>Total:</strong>
-                    <span>${calculateTotalPrice()}</span>
-                </li>
-            </ul>
+                        </li>
+                    ))}
+                </ul>
+                <div className="list-group-item d-flex justify-content-between bg-light">
+                    <h5 className="mb-0">Total:</h5>
+                    <h5 className="mb-0">${calculateTotalPrice()}</h5>
+                </div>
+            </div>
 
-            <h3>Informations de livraison</h3>
             <form onSubmit={handleSubmitOrder}>
-                <div className="mb-3">
-                    <label className="form-label">Nom complet</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="fullName"
-                        value={shippingInfo.fullName}
-                        onChange={handleShippingChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Adresse e-mail</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        value={shippingInfo.email}
-                        onChange={handleShippingChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Adresse de livraison</label>
-                    <textarea
-                        className="form-control"
-                        rows="3"
-                        name="address"
-                        value={shippingInfo.address}
-                        onChange={handleShippingChange}
-                        required
-                    ></textarea>
-                </div>
-
-                <h3 className="mt-4">Informations de paiement</h3>
-                <div className="mb-3">
-                    <label className="form-label">Numéro de carte</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="cardNumber"
-                        value={paymentInfo.cardNumber}
-                        onChange={handlePaymentChange}
-                        placeholder="XXXX XXXX XXXX XXXX"
-                        maxLength="19"
-                        required
-                    />
-                </div>
                 <div className="row">
                     <div className="col-md-6">
+                        <h4>Informations de livraison</h4>
                         <div className="mb-3">
-                            <label className="form-label">Date d'expiration</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                name="expiryDate"
-                                value={paymentInfo.expiryDate}
-                                onChange={handlePaymentChange}
-                                placeholder="MM/YY"
-                                maxLength="5"
+                                placeholder="Nom complet"
+                                name="fullName"
+                                value={shippingInfo.fullName}
+                                onChange={handleShippingChange}
                                 required
                             />
                         </div>
-                    </div>
-                    <div className="col-md-6">
                         <div className="mb-3">
-                            <label className="form-label">CVV</label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                placeholder="Adresse email"
+                                name="email"
+                                value={shippingInfo.email}
+                                onChange={handleShippingChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <textarea
+                                className="form-control"
+                                placeholder="Adresse de livraison"
+                                rows="3"
+                                name="address"
+                                value={shippingInfo.address}
+                                onChange={handleShippingChange}
+                                required
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div className="col-md-6">
+                        <h4>Informations de paiement</h4>
+                        <div className="mb-3">
                             <input
                                 type="text"
                                 className="form-control"
-                                name="cvv"
-                                value={paymentInfo.cvv}
+                                placeholder="Numéro de carte (4242 4242 4242 4242)"
+                                name="cardNumber"
+                                value={paymentInfo.cardNumber}
                                 onChange={handlePaymentChange}
-                                placeholder="XXX"
-                                maxLength="4"
+                                pattern="\d{16}"
                                 required
                             />
+                        </div>
+                        <div className="row g-3">
+                            <div className="col-6">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="MM/AA"
+                                    name="expiryDate"
+                                    value={paymentInfo.expiryDate}
+                                    onChange={handlePaymentChange}
+                                    pattern="\d{2}/\d{2}"
+                                    required
+                                />
+                            </div>
+                            <div className="col-6">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="CVV"
+                                    name="cvv"
+                                    value={paymentInfo.cvv}
+                                    onChange={handlePaymentChange}
+                                    pattern="\d{3}"
+                                    required
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-success btn-lg">Confirmer la commande</button>
-                <Link to="/cart" className="btn btn-secondary ms-2">Retour au panier</Link>
+                <div className="d-grid gap-2 mt-4">
+                    <button type="submit" className="btn btn-lg btn-primary">
+                        Payer ${calculateTotalPrice()}
+                    </button>
+                    <Link to="/cart" className="btn btn-secondary">
+                        Modifier le panier
+                    </Link>
+                </div>
             </form>
         </div>
     );
