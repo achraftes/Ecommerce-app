@@ -12,19 +12,27 @@ function Prodact({ propst, showbutton }) {
 
     cart.push(propst);
     localStorage.setItem('cart', JSON.stringify(cart));
-
     setIsAdded(true);
     console.log(`Produit "${propst.title}" ajouté au panier.`);
   };
 
   return (
     <div className="card shadow-sm h-100 rounded-4 border-0">
-      <img
-        src={propst.image}
-        className="card-img-top rounded-top-4"
-        alt={propst.title}
-        style={{ height: '200px', objectFit: 'cover' }}
-      />
+      <div
+        className="d-flex align-items-center justify-content-center bg-light"
+        style={{ height: '220px', overflow: 'hidden', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem' }}
+      >
+        <img
+          src={propst.image}
+          alt={propst.title}
+          style={{
+            maxHeight: '100%',
+            maxWidth: '100%',
+            objectFit: 'contain'
+          }}
+        />
+      </div>
+
       <div className="card-body d-flex flex-column">
         <h5 className="card-title text-primary">{propst.title}</h5>
         <p className="card-text text-muted" style={{ flexGrow: 1 }}>
