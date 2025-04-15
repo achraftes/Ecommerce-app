@@ -1,51 +1,84 @@
 import './ChatBot.css';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function ChatBot({ showChat, setShowChat }) {
     const [messages, setMessages] = useState([]);
     const [userMessage, setUserMessage] = useState('');
-    const [step, setStep] = useState(0); // Pour suivre l'étape du dialogue
+    const [isLoading, setIsLoading] = useState(false);
+    const messagesEndRef = useRef(null);
 
-    // Fonction pour gérer l'envoi du message
+    // Auto-scroll to bottom of messages
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Initialize chat with a welcome message
+    useEffect(() => {
+        if (messages.length === 0) {
+            setMessages([
+                { 
+                    sender: 'bot', 
+                    text: "Bonjour ! Je suis votre assistant virtuel. Je peux vous aider avec n'importe quelle question. Comment puis-je vous aider aujourd'hui ?" 
+                }
+            ]);
+        }
+    }, [messages]);
+
+    // Generate a chat response based on the input message
+    const generateResponse = (input) => {
+        // Simple keyword-based responses
+        const inputLower = input.toLowerCase();
+        
+        if (inputLower.includes('bonjour') || inputLower.includes('salut') || inputLower.includes('hello')) {
+            return "Bonjour ! Comment puis-je vous aider aujourd'hui ?";
+        } else if (inputLower.includes('merci')) {
+            return "Avec plaisir ! Y a-t-il autre chose dont vous avez besoin ?";
+        } else if (inputLower.includes('produit') || inputLower.includes('acheter') || inputLower.includes('trouver')) {
+            return "Je peux vous aider à trouver des produits. Quelle catégorie vous intéresse ? Électronique, vêtements, maison ou autres ?";
+        } else if (inputLower.includes('électronique')) {
+            return "Dans notre section électronique, nous avons des smartphones, ordinateurs, tablettes, et accessoires. Quel type de produit électronique recherchez-vous ?";
+        } else if (inputLower.includes('vêtement')) {
+            return "Dans notre section vêtements, nous avons des collections pour hommes, femmes et enfants. Quelle catégorie vous intéresse ?";
+        } else if (inputLower.includes('prix') || inputLower.includes('coût')) {
+            return "Nos produits sont disponibles dans différentes gammes de prix. Avez-vous un budget spécifique en tête ?";
+        } else if (inputLower.includes('livraison')) {
+            return "Nous offrons la livraison gratuite pour les commandes de plus de 50€. La livraison standard prend 3-5 jours ouvrables.";
+        } else if (inputLower.includes('paiement')) {
+            return "Nous acceptons les cartes de crédit, PayPal, et les virements bancaires comme modes de paiement.";
+        } else if (inputLower.includes('retour') || inputLower.includes('remboursement')) {
+            return "Notre politique de retour permet un remboursement complet dans les 30 jours suivant l'achat, à condition que le produit soit en parfait état.";
+        } else if (inputLower.includes('au revoir') || inputLower.includes('bye')) {
+            return "Merci d'avoir discuté avec moi ! N'hésitez pas à revenir si vous avez d'autres questions.";
+        } else if (inputLower.includes('aide') || inputLower.includes('besoin')) {
+            return "Je suis là pour vous aider ! Dites-moi simplement ce dont vous avez besoin ou quelle information vous recherchez.";
+        } else if (inputLower.includes('comment')) {
+            return "Pour vous aider de manière plus précise, pourriez-vous me donner plus de détails sur ce que vous cherchez à faire ?";
+        } else {
+            // Réponse générique pour les cas non couverts
+            return "Merci pour votre message. Pour mieux vous aider, pourriez-vous préciser votre demande ou me poser une question plus spécifique ?";
+        }
+    };
+
     const handleSendMessage = (e) => {
         e.preventDefault();
         if (!userMessage.trim()) return;
 
         const userMsg = { sender: 'user', text: userMessage };
         setMessages(prev => [...prev, userMsg]);
-
-        // Réponse du bot en fonction de l'étape du dialogue
-        setTimeout(() => {
-            let botMsg = { sender: 'bot', text: '' };
-
-            if (step === 0) {
-                botMsg.text = "Bonjour ! Que puis-je vous aider à trouver aujourd'hui ?";
-                setStep(1);
-            } else if (step === 1) {
-                botMsg.text = "Super, vous cherchez un produit spécifique ou vous avez besoin d'aide pour choisir ?";
-                setStep(2);
-            } else if (step === 2) {
-                // Réponse dynamique en fonction de la catégorie donnée
-                if (userMessage.toLowerCase().includes('électronique')) {
-                    botMsg.text = "D'accord, je vous aide à trouver des produits électroniques. Voulez-vous filtrer par prix ou marque ?";
-                } else if (userMessage.toLowerCase().includes('vêtement')) {
-                    botMsg.text = "D'accord, je vous aide à trouver des vêtements. Voulez-vous filtrer par taille ou couleur ?";
-                } else {
-                    botMsg.text = "D'accord, je vous aide à trouver d'autres produits. Voulez-vous filtrer par prix, marque, ou catégorie ?";
-                }
-                setStep(3);
-            } else if (step === 3) {
-                botMsg.text = `Merci pour votre réponse ! Je vais chercher des ${userMessage}. Est-ce que vous voulez que je filtre par prix ou marque ?`;
-                setStep(4);
-            } else {
-                botMsg.text = "Merci d'avoir utilisé notre assistant ! Si vous avez d'autres questions, n'hésitez pas à demander.";
-                setStep(0); // Réinitialiser le chatbot
-            }
-
-            setMessages(prev => [...prev, botMsg]);
-        }, 500);
-
         setUserMessage('');
+        setIsLoading(true);
+
+        // Simuler un délai de réponse pour plus de réalisme
+        setTimeout(() => {
+            const botResponse = generateResponse(userMsg.text);
+            const botMsg = { sender: 'bot', text: botResponse };
+            setMessages(prev => [...prev, botMsg]);
+            setIsLoading(false);
+        }, 800);
     };
 
     if (!showChat) return null;
@@ -54,7 +87,7 @@ function ChatBot({ showChat, setShowChat }) {
         <div className="chatbot-window">
             <div className="chatbot-header">
                 <strong>Assistant Virtuel</strong>
-                <button onClick={() => setShowChat(false)} className="close-btn">X</button>
+                <button onClick={() => setShowChat(false)} className="close-btn">×</button>
             </div>
             <div className="chatbot-body">
                 {messages.map((msg, idx) => (
@@ -62,6 +95,16 @@ function ChatBot({ showChat, setShowChat }) {
                         {msg.text}
                     </div>
                 ))}
+                {isLoading && (
+                    <div className="message bot typing">
+                        <div className="typing-indicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                )}
+                <div ref={messagesEndRef} />
             </div>
             <form className="chatbot-input" onSubmit={handleSendMessage}>
                 <input
