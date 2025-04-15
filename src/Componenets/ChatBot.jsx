@@ -1,4 +1,3 @@
-// ChatBot.jsx
 import './ChatBot.css';
 import { useState } from 'react';
 
@@ -26,7 +25,14 @@ function ChatBot({ showChat, setShowChat }) {
                 botMsg.text = "Super, vous cherchez un produit spécifique ou vous avez besoin d'aide pour choisir ?";
                 setStep(2);
             } else if (step === 2) {
-                botMsg.text = "D'accord, je vous aide à trouver le produit. Est-ce un produit électronique, un vêtement, ou autre chose ?";
+                // Réponse dynamique en fonction de la catégorie donnée
+                if (userMessage.toLowerCase().includes('électronique')) {
+                    botMsg.text = "D'accord, je vous aide à trouver des produits électroniques. Voulez-vous filtrer par prix ou marque ?";
+                } else if (userMessage.toLowerCase().includes('vêtement')) {
+                    botMsg.text = "D'accord, je vous aide à trouver des vêtements. Voulez-vous filtrer par taille ou couleur ?";
+                } else {
+                    botMsg.text = "D'accord, je vous aide à trouver d'autres produits. Voulez-vous filtrer par prix, marque, ou catégorie ?";
+                }
                 setStep(3);
             } else if (step === 3) {
                 botMsg.text = `Merci pour votre réponse ! Je vais chercher des ${userMessage}. Est-ce que vous voulez que je filtre par prix ou marque ?`;
