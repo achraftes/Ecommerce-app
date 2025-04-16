@@ -1,6 +1,7 @@
 import './App.css';
 import About from './Componenets/About';
 import CartPage from './Componenets/CartPage';
+import ChatButtonFloating from './Componenets/ChatButtonFloating';
 import CheckoutPage from './Componenets/CheckoutPage';
 import Contact from './Componenets/Contact';
 import Footer from './Componenets/Footer';
@@ -27,7 +28,7 @@ function App() {
                     <Route path='services' element={<Services />} />
                     <Route path='product/:productId' element={<ProductDetails />} />
                 </Routes> 
-                
+                 <ChatButtonFloating/>
                 
                  <br />  <br />
                 <Footer />
