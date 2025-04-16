@@ -5,6 +5,7 @@ import ChatButtonFloating from './Componenets/ChatButtonFloating';
 import CheckoutPage from './Componenets/CheckoutPage';
 import Contact from './Componenets/Contact';
 import Footer from './Componenets/Footer';
+import GamePage from './Componenets/GamePage';
 import Navbar from './Componenets/Navbar';
 import Prodactlist from './Componenets/Prodactlist';
 import ProductDetails from './Componenets/ProductDetails';
@@ -23,6 +24,7 @@ function App() {
                     <Route path='/products' element={<Prodactlist />} />
                     <Route path='about' element={<About />} />
                     <Route path="/cart" element={<CartPage />} />
+                    <Route path="/game" element={<GamePage />} />
                     <Route path="/checkout" element={<CheckoutPage />} /> {/* Changed path to /checkout */}
                     <Route path='contact' element={<Contact />} />
                     <Route path='services' element={<Services />} />
