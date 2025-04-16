@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faSearch, faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 
 
@@ -71,6 +71,12 @@ function Navbar() {
                         </li>
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`} to="/contact">Contact</Link>
+                        </li>
+                        {/* Nouveau lien pour la page de jeu */}
+                        <li className="nav-item">
+                            <Link className={`nav-link ${location.pathname === '/game' ? 'active' : ''}`} to="/game">
+                                <FontAwesomeIcon icon={faGamepad} className="me-1" /> Jeux
+                            </Link>
                         </li>
                     </ul>
                     <div className="d-flex align-items-center ms-3">
