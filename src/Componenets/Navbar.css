@@ -1,172 +1,158 @@
-/* Nouvelle version modernisée */
+/* Navbar.css - Nouveau style */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 .navbar {
-    padding: 1rem 0;
-    background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%);
-    font-family: 'Inter', sans-serif;
+    padding: 0.8rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-   
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
 .navbar-brand {
     font-weight: 700;
-    font-size: 2rem;
-    color: #FFFFFF;
+    font-size: 1.8rem;
     letter-spacing: -0.5px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.navbar-brand span {
-    color: #2ecc71;
-    position: relative;
-}
-
-.navbar-brand span::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: currentColor;
+.gradient-text {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .IMG {
-    width: 55px;
-    height: 55px;
-    border-radius: 16px;
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
     object-fit: cover;
-    margin-right: 15px;
-    border: 2px solid #2ecc71;
-    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    margin-right: 12px;
+    border: 2px solid #e0e7ff;
+    transition: transform 0.3s ease;
 }
 
-.navbar-toggler {
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    padding: 0.5rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-.navbar-toggler:hover {
-    border-color: #2ecc71;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(46, 204, 113, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.IMG:hover {
+    transform: rotate(8deg);
 }
 
 .nav-link {
-    color: rgba(255, 255, 255, 0.9);
+    color: #1f2937;
     font-weight: 500;
-    padding: 12px 25px;
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 0 8px;
+    transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
 }
 
-.nav-link::before {
+.nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: -2px;
+    left: 50%;
     width: 0;
-    height: 3px;
-    background: #2ecc71;
-    transition: width 0.3s ease;
+    height: 2px;
+    background: #2563eb;
+    transition: all 0.3s ease;
 }
 
-.nav-link:hover::before,
-.nav-link.active::before {
+.nav-link:hover::after,
+.nav-link.active::after {
     width: 100%;
+    left: 0;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: #ffffff;
-    background: rgba(46, 204, 113, 0.1);
+    color: #2563eb;
+    background: #f5f3ff;
 }
 
-/* Espacement entre les éléments de la liste */
-.navbar-nav .nav-item {
-    margin-right: 20px; /* Ajoute de l'espace entre les éléments */
+.search-wrapper {
+    position: relative;
+    margin-right: 20px;
 }
 
-/* Si vous voulez aussi un espacement à droite du dernier élément */
-.navbar-nav .nav-item:last-child {
-    margin-right: 0;
-}
-
-.dropdown-menu {
-    background: rgba(44, 62, 80, 0.95);
-    border: 1px solid rgba(46, 204, 113, 0.3);
-    border-radius: 12px;
-    
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-item {
-    color: rgba(255, 255, 255, 0.8);
-    padding: 12px 20px;
-    transition: all 0.2s ease;
-}
-
-.dropdown-item:hover {
-    background: rgba(46, 204, 113, 0.1);
-    color: #2ecc71;
-}
-
-.form-control {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    border-radius: 8px;
+.search-input {
+    width: 240px;
+    padding: 10px 40px 10px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 30px;
     transition: all 0.3s ease;
 }
 
-.form-control:focus {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: #2ecc71;
-    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+.search-input:focus {
+    width: 300px;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-.btn-outline-success {
-    border: 2px solid #2ecc71;
-    color: #2ecc71;
-    transition: all 0.3s ease;
+.search-button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6b7280;
 }
 
-.btn-outline-success:hover {
-    background: #2ecc71;
-    color: #2C3E50;
-    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
-}
-
-/* Styles spécifiques pour le lien du panier et le compteur */
 .cart-link {
-    display: inline-flex !important; /* Force inline-flex pour aligner l'icône et le nombre */
-    align-items: center; /* Alignement vertical au centre */
-    color: rgba(10, 10, 10, 0.9) !important; /* Hérite de la couleur du lien par défaut */
-    text-decoration: none !important; /* Supprime la décoration de lien par défaut */
+    position: relative;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.cart-link:hover {
+    background: #f5f3ff;
+}
+
+.cart-icon {
+    font-size: 1.4rem;
+    color: #1f2937;
 }
 
 .cart-count {
-    margin-left: 5px; /* Espacement à gauche du nombre */
-    color: #ff4d4d; /* Couleur rouge pour le nombre */
-    font-size: 0.9em; /* Taille de la police du nombre */
-    font-weight: bold; /* Mettre le nombre en gras */
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ef4444;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
 }
 
-/* Ajustements pour les écrans plus petits */
+/* Mobile version */
 @media (max-width: 768px) {
-    .cart-count {
-        font-size: 0.8em;
-        margin-left: 3px;
+    .navbar-collapse {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+    }
+
+    .nav-link {
+        margin: 5px 0;
+        padding: 12px;
+    }
+
+    .search-input {
+        width: 100%;
+        margin: 10px 0;
     }
 }
