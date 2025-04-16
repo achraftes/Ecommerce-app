@@ -9,6 +9,9 @@ function CheckoutPage() {
         return storedCart ? JSON.parse(storedCart) : [];
     });
 
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [orderNumber, setOrderNumber] = useState('');
+
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => total + item.price, 0).toFixed(2);
     };
@@ -37,13 +40,14 @@ function CheckoutPage() {
         const doc = new jsPDF();
         const totalPrice = calculateTotalPrice();
         const date = new Date().toLocaleDateString();
-        const orderNumber = Math.floor(100000 + Math.random() * 900000);
+        const newOrderNumber = Math.floor(100000 + Math.random() * 900000);
+        setOrderNumber(newOrderNumber);
 
         doc.setFontSize(22);
         doc.text("Facture de commande", 105, 20, { align: 'center' });
 
         doc.setFontSize(12);
-        doc.text(`Numéro de commande: #${orderNumber}`, 20, 40);
+        doc.text(`Numéro de commande: #${newOrderNumber}`, 20, 40);
         doc.text(`Date: ${date}`, 20, 50);
 
         doc.setFontSize(14);
@@ -90,7 +94,7 @@ function CheckoutPage() {
         doc.setFontSize(12);
         doc.text("Merci pour votre commande!", 105, finalY + 50, { align: 'center' });
 
-        doc.save(`facture_${orderNumber}.pdf`);
+        doc.save(`facture_${newOrderNumber}.pdf`);
     };
 
     const handleSubmitOrder = (e) => {
@@ -98,16 +102,54 @@ function CheckoutPage() {
 
         if (!shippingInfo.fullName || !shippingInfo.email || !shippingInfo.address || 
             !paymentInfo.cardNumber || !paymentInfo.expiryDate || !paymentInfo.cvv) {
-            alert('Veuillez remplir tous les champs obligatoires.');
+            // Alerte d'erreur de validation
+            const errorAlert = document.createElement('div');
+            errorAlert.className = 'alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+            errorAlert.style.zIndex = '1050';
+            errorAlert.style.maxWidth = '500px';
+            errorAlert.innerHTML = `
+                <strong><i class="bi bi-exclamation-triangle-fill me-2"></i>Attention!</strong> Veuillez remplir tous les champs obligatoires.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.appendChild(errorAlert);
+            
+            // Supprimer l'alerte après 5 secondes
+            setTimeout(() => {
+                errorAlert.remove();
+            }, 5000);
+            
             return;
         }
 
         try {
             generateInvoicePDF();
-            alert('Commande confirmée! Votre facture a été téléchargée.');
+            setShowSuccessAlert(true);
+            
+            // Faire défiler jusqu'en haut pour voir l'alerte
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Cacher l'alerte après 8 secondes
+            setTimeout(() => {
+                setShowSuccessAlert(false);
+            }, 8000);
         } catch (error) {
             console.error("Erreur PDF:", error);
-            alert("Erreur lors de la génération de la facture.");
+            
+            // Alerte d'erreur de génération PDF
+            const errorAlert = document.createElement('div');
+            errorAlert.className = 'alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+            errorAlert.style.zIndex = '1050';
+            errorAlert.style.maxWidth = '500px';
+            errorAlert.innerHTML = `
+                <strong><i class="bi bi-x-circle-fill me-2"></i>Erreur!</strong> Impossible de générer la facture.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.appendChild(errorAlert);
+            
+            // Supprimer l'alerte après 5 secondes
+            setTimeout(() => {
+                errorAlert.remove();
+            }, 5000);
         }
     };
 
@@ -122,6 +164,27 @@ function CheckoutPage() {
 
     return (
         <div className="container py-5">
+            {showSuccessAlert && (
+                <div className="alert alert-success alert-dismissible fade show mb-4 shadow-sm" role="alert">
+                    <div className="d-flex align-items-center">
+                        <div className="me-3 text-success bg-success bg-opacity-10 p-2 rounded-circle">
+                            <i className="bi bi-check-circle-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <h4 className="alert-heading mb-1">Commande confirmée!</h4>
+                            <p className="mb-0">
+                                Merci pour votre achat. Votre commande #{orderNumber} a été traitée avec succès et votre facture a été téléchargée.
+                            </p>
+                            <hr />
+                            <p className="mb-0 small">
+                                Un email de confirmation a été envoyé à {shippingInfo.email}
+                            </p>
+                        </div>
+                    </div>
+                    <button type="button" className="btn-close" onClick={() => setShowSuccessAlert(false)} aria-label="Close"></button>
+                </div>
+            )}
+
             <h2 className="text-center mb-5">🛒 Finalisation de commande</h2>
 
             <div className="card mb-4 shadow-sm">
