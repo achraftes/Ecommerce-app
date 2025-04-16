@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Sparkles } from 'lucide-react';
 
 export default function MemoryGame() {
   const [cards, setCards] = useState([]);
@@ -9,14 +8,14 @@ export default function MemoryGame() {
   const [gameOver, setGameOver] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Images de produits (à remplacer par vos propres produits)
-  const productImages = [
-    { id: 1, name: "Chaussures" },
-    { id: 2, name: "T-shirt" },
-    { id: 3, name: "Pantalon" },
-    { id: 4, name: "Montre" },
-    { id: 5, name: "Sac" },
-    { id: 6, name: "Chapeau" },
+  // Produits avec des couleurs associées
+  const products = [
+    { id: 1, name: "Chaussures", color: "#FF5733" },
+    { id: 2, name: "T-shirt", color: "#33FF57" },
+    { id: 3, name: "Pantalon", color: "#3357FF" },
+    { id: 4, name: "Montre", color: "#F3FF33" },
+    { id: 5, name: "Sac", color: "#FF33F3" },
+    { id: 6, name: "Chapeau", color: "#33FFF3" },
   ];
 
   // Initialiser le jeu
@@ -27,7 +26,7 @@ export default function MemoryGame() {
   const initGame = () => {
     setIsLoading(true);
     // Doubler les cartes pour créer des paires
-    const duplicatedCards = [...productImages, ...productImages]
+    const duplicatedCards = [...products, ...products]
       .map(item => ({
         ...item,
         id: `${item.id}-${Math.random().toString(36).substring(2)}`, // ID unique
@@ -86,18 +85,18 @@ export default function MemoryGame() {
   };
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-64">Chargement du jeu...</div>;
+    return <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>Chargement du jeu...</div>;
   }
 
   return (
-    <div className="p-4 bg-gray-100 rounded-lg shadow-md">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-blue-600">Jeu de Mémoire</h2>
-        <div className="flex items-center gap-4">
-          <p className="text-gray-700">Coups: {moves}</p>
+    <div className="p-4 bg-light rounded shadow">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fs-1 fw-bold text-primary">Jeu de Mémoire</h2>
+        <div className="d-flex align-items-center gap-3">
+          <p className="text-secondary mb-0">Coups: {moves}</p>
           <button 
             onClick={restartGame}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+            className="btn btn-primary"
           >
             Recommencer
           </button>
@@ -105,48 +104,61 @@ export default function MemoryGame() {
       </div>
 
       {gameOver ? (
-        <div className="text-center p-6 bg-green-100 rounded-lg">
-          <Sparkles className="mx-auto mb-2 text-yellow-500" size={40} />
-          <h3 className="text-xl font-bold mb-2">Félicitations!</h3>
-          <p className="mb-4">Vous avez terminé le jeu en {moves} coups!</p>
+        <div className="text-center p-4 bg-success bg-opacity-25 rounded">
+          <div className="display-4 mb-2 text-warning">🎉</div>
+          <h3 className="fs-3 fw-bold mb-2">Félicitations!</h3>
+          <p className="mb-3">Vous avez terminé le jeu en {moves} coups!</p>
           <button 
             onClick={restartGame}
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+            className="btn btn-success"
           >
             Jouer à nouveau
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="row row-cols-3 row-cols-md-4 g-3">
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedPairs.includes(card.id);
+            
             return (
-              <div 
-                key={card.id}
-                onClick={() => handleCardClick(card.id)}
-                className={`aspect-square flex items-center justify-center rounded-lg transition-all duration-300 cursor-pointer ${
-                  isFlipped 
-                    ? "bg-white shadow-md transform rotate-y-180" 
-                    : "bg-blue-500 hover:bg-blue-600"
-                }`}
-              >
-                {isFlipped ? (
-                  <div className="text-center p-2">
-                    <div className="w-full h-16 bg-gray-200 mb-2 flex items-center justify-center">
-                      <span className="text-xs text-gray-500">Image produit</span>
-                    </div>
-                    <p className="text-sm font-medium">{card.name}</p>
+              <div key={card.id} className="col">
+                <div 
+                  onClick={() => handleCardClick(card.id)}
+                  className={`card h-100 ${isFlipped ? 'bg-white' : 'bg-primary'} cursor-pointer`}
+                  style={{ 
+                    transition: 'all 0.3s ease',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div className="card-body d-flex flex-column justify-content-center align-items-center">
+                    {isFlipped ? (
+                      <>
+                        <div 
+                          className="mb-2 rounded-circle d-flex justify-content-center align-items-center"
+                          style={{ 
+                            width: '40px', 
+                            height: '40px', 
+                            backgroundColor: card.color,
+                            color: '#fff',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          {card.name.charAt(0).toUpperCase()}
+                        </div>
+                        <p className="card-text fw-medium text-center mb-0">{card.name}</p>
+                      </>
+                    ) : (
+                      <span className="fs-1 text-white">?</span>
+                    )}
                   </div>
-                ) : (
-                  <span className="text-2xl text-white">?</span>
-                )}
+                </div>
               </div>
             );
           })}
         </div>
       )}
       
-      <div className="mt-4 text-sm text-gray-600">
+      <div className="mt-3 text-secondary">
         <p>Retrouvez les paires de produits identiques! Un bon score pourrait vous offrir une réduction sur votre prochain achat.</p>
       </div>
     </div>
