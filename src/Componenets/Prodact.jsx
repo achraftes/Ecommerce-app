@@ -19,8 +19,13 @@ function Prodact({ propst, showbutton }) {
   return (
     <div className="card shadow-sm h-100 rounded-4 border-0">
       <div
-        className="d-flex align-items-center justify-content-center bg-light"
-        style={{ height: '220px', overflow: 'hidden', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem' }}
+        className="d-flex align-items-center justify-content-center"
+        style={{ 
+          height: '220px', 
+          overflow: 'hidden', 
+          borderTopLeftRadius: '1rem', 
+          borderTopRightRadius: '1rem' 
+        }}
       >
         <img
           src={propst.image}
