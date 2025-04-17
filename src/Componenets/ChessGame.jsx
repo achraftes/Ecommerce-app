@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Chessboard } from 'react-chessboard';  // Import de la bibliothèque
 import { Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import * as Chess from 'chess.js';  // Importation correcte de chess.js
 
 function ChessGame() {
   const [gameState, setGameState] = useState({
@@ -8,34 +9,35 @@ function ChessGame() {
     orientation: 'white',  // Orientation des pièces (blanc ou noir)
   });
 
-  const handleDrop = ({ piece, targetSquare }) => {
-    // Gestion du déplacement d'une pièce
-    console.log('Pièce:', piece);
-    console.log('Cible:', targetSquare);
+  const chess = new Chess(); // Création de l'instance de chess.js
 
-    // Logique pour vérifier si le coup est valide et mettre à jour l'état du jeu
-    const newFen = calculateNewFen(piece, targetSquare);  // Utilisez une fonction qui met à jour le FEN
-    if (newFen) {
+  // Fonction pour gérer le déplacement des pièces
+  const handleDrop = ({ sourceSquare, targetSquare, piece }) => {
+    const move = chess.move({
+      from: sourceSquare,  // Utiliser sourceSquare
+      to: targetSquare,  // Utiliser targetSquare
+      promotion: 'q',  // Si une pièce atteint la dernière rangée, on la transforme en reine
+    });
+
+    if (move) {
+      // Si le mouvement est valide, on met à jour le FEN et l'orientation
       setGameState(prevState => ({
         ...prevState,
-        fen: newFen,
-        orientation: prevState.orientation === 'white' ? 'black' : 'white',  // Alterner entre les joueurs
+        fen: chess.fen(),  // Met à jour la position FEN
+        orientation: prevState.orientation === 'white' ? 'black' : 'white',  // Alterne entre les joueurs
       }));
+    } else {
+      alert('Mouvement invalide');
     }
   };
 
+  // Fonction de réinitialisation du jeu
   const handleReset = () => {
+    chess.reset();  // Réinitialiser le jeu avec la position de départ
     setGameState({
-      fen: 'start',  // Réinitialisation à la position de départ
+      fen: 'start',
       orientation: 'white',
     });
-  };
-
-  // Fonction fictive pour simuler la mise à jour du FEN après un mouvement
-  const calculateNewFen = (piece, targetSquare) => {
-    // Cette logique devrait être remplacée par une gestion des coups de manière réelle
-    // Retourner un FEN simulé pour l'exemple
-    return 'start';  // Vous devrez remplacer cela par la logique réelle pour obtenir un FEN valide après un coup
   };
 
   return (
