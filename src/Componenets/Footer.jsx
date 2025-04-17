@@ -17,21 +17,21 @@ const Footer = () => {
               Notre mission est de vous offrir le meilleur service client
               avec des produits exceptionnels.
             </p>
-            <div className="footer-social"> {/* MODIFIÉ */}
-              <a href="#" className="footer-link">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="footer-link">
+            <div className="footer-social">
+              <a href="https://www.instagram.com/achraf_chkr/" className="footer-link" target="_blank" rel="noopener noreferrer">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="footer-link">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="footer-link">
+              <a href="https://www.youtube.com/@achrafchikrabane3959" className="footer-link" target="_blank" rel="noopener noreferrer">
                 <Youtube size={20} />
               </a>
-              <a href="#" className="footer-link">
+              <a href="https://www.linkedin.com/in/achraf-chikrabane-850554291/" className="footer-link" target="_blank" rel="noopener noreferrer">
                 <Linkedin size={20} />
+              </a>
+              <a href="https://web.facebook.com/profile.php?id=61561337622222" className="footer-link" target="_blank" rel="noopener noreferrer">
+                <Facebook size={20} />
+              </a>
+              <a href="https://x.com/chkr_achraf" className="footer-link" target="_blank" rel="noopener noreferrer">
+                <Twitter size={20} />
               </a>
             </div>
           </div>
