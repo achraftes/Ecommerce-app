@@ -16,9 +16,9 @@ export default function WordScramble() {
   const [userInput, setUserInput] = useState("");
   const [score, setScore] = useState(0);
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState<"success" | "error" | null>(null);
+  const [messageType, setMessageType] = useState(null); // <- retiré le type ici
 
-  const scrambleWord = (word: string) => {
+  const scrambleWord = (word) => {
     return word
       .split('')
       .sort(() => Math.random() - 0.5)
@@ -40,7 +40,7 @@ export default function WordScramble() {
     selectNewWord();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (userInput.toUpperCase() === currentWord) {

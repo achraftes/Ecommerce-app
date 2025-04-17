@@ -10,8 +10,8 @@ const COLORS = [
 ];
 
 export default function ColorMatch() {
-  const [targetColor, setTargetColor] = useState<typeof COLORS[0] | null>(null);
-  const [options, setOptions] = useState<typeof COLORS>([]);
+  const [targetColor, setTargetColor] = useState(null);
+  const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(30);
   const [gameOver, setGameOver] = useState(false);
@@ -50,7 +50,7 @@ export default function ColorMatch() {
     return () => clearInterval(timer);
   }, [isPlaying]);
 
-  const handleColorClick = (color: typeof COLORS[0]) => {
+  const handleColorClick = (color) => {
     if (!isPlaying) return;
 
     if (color.name === targetColor?.name) {
