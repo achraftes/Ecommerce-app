@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MemoryGame from './MemoryGame';
-import WordScramble from './WordScramble';
+import ChessGame from './ChessGame';
 import ColorMatch from './ColorMatch';
 import { Gift, Trophy, Star } from 'lucide-react';
 
@@ -21,7 +21,7 @@ function GamePage() {
       id: 'wordscramble',
       name: 'Mots Mélangés',
       description: 'Devinez le mot correct à partir des lettres mélangées',
-      component: WordScramble,
+      component: ChessGame,
       color: 'bg-success', // Remplacé pour Bootstrap
       icon: Trophy
     },
