@@ -1,113 +1,76 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const COLORS = [
-  { name: 'ROUGE', color: 'bg-red-500' },
-  { name: 'BLEU', color: 'bg-blue-500' },
-  { name: 'VERT', color: 'bg-green-500' },
-  { name: 'JAUNE', color: 'bg-yellow-500' },
-  { name: 'VIOLET', color: 'bg-purple-500' },
-  { name: 'ORANGE', color: 'bg-orange-500' }
-];
+const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown'];
 
-export default function ColorMatch() {
-  const [targetColor, setTargetColor] = useState(null);
-  const [options, setOptions] = useState([]);
+function ColorMatch() {
+  const [colorName, setColorName] = useState('');
+  const [colorToGuess, setColorToGuess] = useState('');
+  const [timer, setTimer] = useState(30);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
   const [gameOver, setGameOver] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const shuffleColors = () => {
-    const shuffled = [...COLORS].sort(() => Math.random() - 0.5);
-    const target = shuffled[0];
-    const displayOptions = shuffled.slice(0, 4);
-    setTargetColor(target);
-    setOptions(displayOptions.sort(() => Math.random() - 0.5));
-  };
-
-  const startGame = () => {
-    setScore(0);
-    setTimeLeft(30);
-    setGameOver(false);
-    setIsPlaying(true);
-    shuffleColors();
-  };
 
   useEffect(() => {
-    if (!isPlaying) return;
+    if (timer > 0 && !gameOver) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else if (timer === 0) {
+      setGameOver(true);
+    }
+  }, [timer, gameOver]);
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          setGameOver(true);
-          setIsPlaying(false);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+  useEffect(() => {
+    selectNewColor();
+  }, []);
 
-    return () => clearInterval(timer);
-  }, [isPlaying]);
+  const selectNewColor = () => {
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const colorName = colors[Math.floor(Math.random() * colors.length)];
+    setColorToGuess(colorName);
+    setColorName(randomColor);
+  };
 
   const handleColorClick = (color) => {
-    if (!isPlaying) return;
-
-    if (color.name === targetColor?.name) {
-      setScore((prev) => prev + 1);
-      shuffleColors();
+    if (color === colorToGuess) {
+      setScore(score + 1);
+      setGameOver(false);
+      setTimer(30); // Reset the timer
+      selectNewColor();
     } else {
-      setScore((prev) => Math.max(0, prev - 1));
+      setGameOver(true);
     }
   };
 
-  if (!isPlaying || gameOver) {
-    return (
-      <div className="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Match de Couleurs</h2>
-        
-        {gameOver && (
-          <div className="mb-8">
-            <p className="text-2xl font-bold text-gray-700 mb-2">Score Final: {score}</p>
-            <p className="text-gray-600">Bien joué! Voulez-vous réessayer?</p>
-          </div>
-        )}
-
-        <button
-          onClick={startGame}
-          className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          {gameOver ? 'Rejouer' : 'Commencer'}
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <div className="text-2xl font-bold text-gray-800">Score: {score}</div>
-        <div className="text-xl font-semibold text-gray-600">Temps: {timeLeft}s</div>
-      </div>
-
-      <div className="text-center mb-8">
-        <p className="text-lg mb-2">Cliquez sur la couleur qui correspond au mot:</p>
-        <h2 className="text-4xl font-bold mb-8">{targetColor?.name}</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          {options.map((color, index) => (
-            <button
-              key={index}
-              onClick={() => handleColorClick(color)}
-              className={`${color.color} h-24 rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-200`}
-            />
-          ))}
+    <div className="game-container">
+      <h2>Jeu de correspondance des couleurs</h2>
+      {gameOver ? (
+        <div>
+          <h3>Temps écoulé! Votre score final est : {score}</h3>
+          <button onClick={() => window.location.reload()} className="btn btn-success">Rejouer</button>
         </div>
-      </div>
-
-      <div className="text-gray-600 text-sm text-center">
-        <p>Associez rapidement les couleurs avec leurs noms pour marquer des points!</p>
-      </div>
+      ) : (
+        <div>
+          <h3 style={{ color: colorName }}>Quel est le nom de cette couleur?</h3>
+          <div className="color-buttons">
+            {colors.map((color) => (
+              <button
+                key={color}
+                onClick={() => handleColorClick(color)}
+                className="btn"
+                style={{ backgroundColor: color }}
+              >
+                {color}
+              </button>
+            ))}
+          </div>
+          <p>Temps restant: {timer}s</p>
+          <p>Score: {score}</p>
+        </div>
+      )}
     </div>
   );
 }
+
+export default ColorMatch;
